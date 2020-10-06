@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head>
+  <style>
+  #sample{
+    width: 400px;
+    height:400px;
+    background: gray;
+  }
+  </style>
+  <script>
+  var quotes = []
+  var horizons = []
+  var leaf = []
+  var user = []
+  var r
+  fetch('quotes.json')
+  .then(response => response.json())
+  .then(data => {
+    quotes = data
+    horizons = quotes["Horizons"]
+    leaf = quotes["Leaf"]
+    user = quotes["User"]
+    console.log(quotes)
+    console.log(horizons)
+    console.log(leaf)
+    console.log(user)
+  });
+  </script>
+</head>
+<body>
+  <label></label>
+  <select id="resolution">
+     <optgroup label="iPhones">
+    <option value="1x2">1x2</option>
+    <option value="3x4">3x4</option>
+  </select>
+  <select id="position">
+    <option value="0">Top Text</option>
+    <option value="1">Bottom Text</option>
+  </select>
+  <select id="theme">
+    <option value="0">Light</option>
+    <option value="1">Dark</option>
+  </select>
+  <input for="category" type="checkbox">New Horizons</input>
+  <input for="category" type="checkbox">New Leaf</input>
+  <input for="category" type="checkbox">Random</input>
+  <input id="created" placeholder="Enter text here"></input>
+  <button onclick="Create()">Make it, maaan</button>
+  <div id="imgConatiner">
+    <div id="sample">
+    </div>
+  </div>
+
+</body>
+  <script>
+  var sample      = document.getElementById("sample")
+  var submission  = document.getElementById("created")
+  var resolution  = document.getElementById("resolution")
+  var position    = document.getElementById("position")
+  var theme       = document.getElementById("theme")
+  function Create(){
+    r = Math.random();
+
+    chosenQuote = Math.floor(horizons.length * r)
+    console.log(horizons[chosenQuote])
+    console.log(resolution.value)
+    console.log(position.value)
+    console.log(theme.value)
+    console.log(submission.value)
+    if(theme.value == "1"){
+      sample.style.color = "white"
+    }
+    else if(theme.value == "0"){
+      sample.style.color = "black"
+    }
+
+
+    if (submission.value){
+      sample.textContent = submission.value
+    }
+    else{
+      sample.textContent = horizons[chosenQuote]
+    }
+  }
+  </script>
+</html>
