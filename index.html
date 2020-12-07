@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <style>
   #sample{
     width: 400px;
@@ -20,18 +21,30 @@
     horizons = quotes["Horizons"]
     leaf = quotes["Leaf"]
     user = quotes["User"]
-    console.log(quotes)
-    console.log(horizons)
-    console.log(leaf)
-    console.log(user)
+    //console.log(quotes)
+    //console.log(horizons)
+    //console.log(leaf)
+    //console.log(user)
   });
+
+  var resolutions = {
+    "iPhone X"  :  {
+      "width": 1125,
+      "height": 2436
+    },
+    "iPhone 8 Plus"  :  {
+      "width": 1080,
+      "height": 1920
+    }
+  }
   </script>
 </head>
 <body>
   <label></label>
   <select id="resolution">
      <optgroup label="iPhones">
-    <option value="1x2">1x2</option>
+    <option value="iPhone X">iPhone X (1125 x 2436)</option>
+    <option value="iPhone 8 Plus">iPhone 8 Plus (1080 x 1920)</option>
     <option value="3x4">3x4</option>
   </select>
   <select id="position">
@@ -42,46 +55,95 @@
     <option value="0">Light</option>
     <option value="1">Dark</option>
   </select>
-  <input for="category" type="checkbox">New Horizons</input>
-  <input for="category" type="checkbox">New Leaf</input>
-  <input for="category" type="checkbox">Random</input>
-  <input id="created" placeholder="Enter text here"></input>
+  <select id="category">Category
+    <option for="category">New Horizons</option>
+    <option for="category">New Leaf</option>
+    <option for="category">Random</option>
+  </select>
+  <input id="inp" placeholder="Enter text here"></input>
   <button onclick="Create()">Make it, maaan</button>
   <div id="imgConatiner">
-    <div id="sample">
+    <img id="img" src="Pascal.png" style="display:none" crossorigin="anonymous">
     </div>
   </div>
+  <canvas id="canvas" width="400" height="400"/>
 
 </body>
   <script>
-  var sample      = document.getElementById("sample")
-  var submission  = document.getElementById("created")
-  var resolution  = document.getElementById("resolution")
-  var position    = document.getElementById("position")
-  var theme       = document.getElementById("theme")
+  var textColor = "red"
+  var textFont  = "22pt Arial"
+  var canvas = document.getElementById('canvas'),
+        ctx = canvas.getContext('2d');
+          ctx.drawImage($('img').get(0), 0, 0);
+          ctx.font = textFont;
+
+  canvas.crossOrigin = "Anonymous";
+
+
+  var submissionElement  = document.getElementById("inp")
+  var resolutionElement  = document.getElementById("resolution")
+  var positionElement    = document.getElementById("position")
+  var themeElement       = document.getElementById("theme")
+
+  var text      = "Hey maaan."
+  var inputText = submissionElement.value
+  var model     = resolutionElement.value
+  var position  = positionElement.value
+  var theme     = themeElement.value
   function Create(){
-    r = Math.random();
+
+    inputText = submissionElement.value
+    model     = resolutionElement.value
+    position  = positionElement.value
+    theme     = themeElement.value
+    r         = Math.random();
+
 
     chosenQuote = Math.floor(horizons.length * r)
-    console.log(horizons[chosenQuote])
-    console.log(resolution.value)
-    console.log(position.value)
-    console.log(theme.value)
-    console.log(submission.value)
-    if(theme.value == "1"){
-      sample.style.color = "white"
-    }
-    else if(theme.value == "0"){
-      sample.style.color = "black"
-    }
+    console.log("horizons[chosenQuote] is " + horizons[chosenQuote])
+    console.log("model is " + model)
+    console.log(resolutions[model].width)
+    console.log(resolutions[model].height)
+    console.log("resolutions[model] is ")
+    console.log(resolutions[model])
+    console.log("position is " + position)
+    console.log("theme is " + theme)
 
-
-    if (submission.value){
-      sample.textContent = submission.value
+    if (inputText === ""){
+      text = horizons[chosenQuote];
     }
     else{
-      sample.textContent = horizons[chosenQuote]
+      text = inputText
     }
+    console.log("text is " + text)
+    if(theme == "1"){
+      //sample.style.color = "white"
+    }
+    else if(theme == "0"){
+      //sample.style.color = "black"
+    }
+    canvas.setAttribute("width",resolutions[model].width)
+    canvas.setAttribute("height",resolutions[model].height)
+    ctx.clearRect(0,0,resolutions[model].width,resolutions[model].height);
+    ctx.drawImage($('img').get(0), 0, 0);
+    //refill text
+    ctx.fillStyle = textColor;
+    ctx.fillText(text,40,80);
   }
   </script>
 </html>
+</form>
+<script>
+
+
+
+
+$(document).on('input','#inp',function(){
+    //redraw image
+    Create()
+
+});
+$('button').click(function(){
+    //console.log(ctx.getImageData(50, 50, 100, 100));
+});
+</script>
