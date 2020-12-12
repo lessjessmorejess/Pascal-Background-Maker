@@ -1,0 +1,30 @@
+<html>
+<head>
+  <script type="application/javascript">
+function init() {
+var canvas = document.getElementById("canvas");
+if (canvas.getContext)
+{
+var ctx = canvas.getContext("2d");
+
+// Create a new image object
+var flower = new Image();
+
+//Provide the source directory of the image you are about to upload
+flower.src = "Pascal.png";
+
+// Draw the original image at location (0,0) on the canvas
+ctx.drawImage(flower, 0, 0);
+
+// Now let's scale the image. We will increase the width by 1.5 times and height by 2 times and draw it alongside the original image for comparison
+ctx.scale(1.5, 2.0);
+ctx.drawImage(flower, 150, 0);
+}
+}
+  </script>
+  <title>Scaling an image on canvas</title>
+</head>
+<body onload="init();">
+<canvas id="canvas" width="900" height="500"></canvas><br>
+</body>
+</html>

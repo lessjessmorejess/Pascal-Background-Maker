@@ -8,89 +8,80 @@
     background: gray;
   }
   </style>
-  <script>
-  var quotes = []
-  var horizons = []
-  var leaf = []
-  var user = []
-  var r
-  fetch('quotes.json')
-  .then(response => response.json())
-  .then(data => {
-    quotes = data
-    horizons = quotes["Horizons"]
-    leaf = quotes["Leaf"]
-    user = quotes["User"]
-    //console.log(quotes)
-    //console.log(horizons)
-    //console.log(leaf)
-    //console.log(user)
-  });
 
-  var resolutions = {
-    "iPhone X"  :  {
-      "width": 1125,
-      "height": 2436
-    },
-    "iPhone 8 Plus"  :  {
-      "width": 1080,
-      "height": 1920
-    }
-  }
-  </script>
 </head>
 <body>
   <label></label>
-  <select id="resolution">
+  <select id="resolution" class="update">
      <optgroup label="iPhones">
     <option value="iPhone X">iPhone X (1125 x 2436)</option>
     <option value="iPhone 8 Plus">iPhone 8 Plus (1080 x 1920)</option>
     <option value="3x4">3x4</option>
   </select>
-  <select id="position">
+  <select id="position" class="update">
     <option value="0">Top Text</option>
     <option value="1">Bottom Text</option>
   </select>
-  <select id="theme">
+  <select id="theme" class="update">
     <option value="0">Light</option>
     <option value="1">Dark</option>
   </select>
-  <select id="category">Category
-    <option for="category">New Horizons</option>
-    <option for="category">New Leaf</option>
-    <option for="category">Random</option>
+  <select id="category" class="update">Category
+    <option value="New Horizons">New Horizons</option>
+    <option value="New Leaf">New Leaf</option>
+    <option value="User">User</option>
+    <option value="Random">Random</option>
   </select>
-  <input id="inp" placeholder="Enter text here"></input>
+  <input id="inp" class="update" placeholder="Enter text here"></input>
   <button onclick="Create()">Make it, maaan</button>
   <div id="imgConatiner">
-    <img id="img" src="Pascal.png" style="display:none" crossorigin="anonymous">
+    <img id="img" src="assets/pascal.png" style="display:none" crossorigin="anonymous">
     </div>
   </div>
   <canvas id="canvas" width="400" height="400"/>
 
 </body>
   <script>
-  var textColor = "red"
-  var textFont  = "22pt Arial"
+  //Declare the foundational variables
+  var pascalLW = {
+      "width": 2048,
+      "height": 2732
+    };
+  var pascalImg = new Image();
+      pascalImg.src = "assets/pascal.png"
+  var lightImg = new Image();
+      lightImg.src = "assets/light.png"
+  var bubbleImg = new Image();
+      bubbleImg.src = "assets/bubble.png"
+  var waterImg = new Image();
+      waterImg.src = "assets/water.png"
+
+
+  var textColor = "#00cbda"
+  var textFont  = "100px Arial" //TODO make the font size dependant on the bubble size
+
+
   var canvas = document.getElementById('canvas'),
         ctx = canvas.getContext('2d');
-          ctx.drawImage($('img').get(0), 0, 0);
-          ctx.font = textFont;
+        canvas.crossOrigin = "Anonymous";
 
-  canvas.crossOrigin = "Anonymous";
-
-
+  //would make these jquery but need document on load
   var submissionElement  = document.getElementById("inp")
   var resolutionElement  = document.getElementById("resolution")
   var positionElement    = document.getElementById("position")
   var themeElement       = document.getElementById("theme")
+  var categoryElement       = document.getElementById("category")
 
+  //Declare default values
   var text      = "Hey maaan."
   var inputText = submissionElement.value
   var model     = resolutionElement.value
   var position  = positionElement.value
   var theme     = themeElement.value
+  var category  = categoryElement.value
   function Create(){
+    if (loaded !== false){
+
 
     inputText = submissionElement.value
     model     = resolutionElement.value
@@ -100,17 +91,30 @@
 
 
     chosenQuote = Math.floor(horizons.length * r)
-    console.log("horizons[chosenQuote] is " + horizons[chosenQuote])
+    /*console.log("horizons[chosenQuote] is " + horizons[chosenQuote])
     console.log("model is " + model)
     console.log(resolutions[model].width)
     console.log(resolutions[model].height)
     console.log("resolutions[model] is ")
     console.log(resolutions[model])
     console.log("position is " + position)
-    console.log("theme is " + theme)
+    console.log("theme is " + theme)*/
 
+    console.log("inputText is '" + inputText + "'")
     if (inputText === ""){
-      text = horizons[chosenQuote];
+      console.log(category)
+      switch (category){
+        case "New Horizons":
+          text = horizons[chosenQuote];
+          break;
+        case "New Leaf":
+          text = leaf[chosenQuote];
+          break;
+        case "user":
+          text = user[chosenQuote];
+          break;
+      }
+
     }
     else{
       text = inputText
@@ -124,12 +128,64 @@
     }
     canvas.setAttribute("width",resolutions[model].width)
     canvas.setAttribute("height",resolutions[model].height)
+    var scaleLarge = resolutions[model].height/pascalLW.height
+    var scaleSmall = resolutions[model].width/pascalLW.width
+    console.log((resolutions[model].width/pascalLW.width) * resolutions[model].height)
+    ctx.scale(scaleLarge,scaleLarge)
     ctx.clearRect(0,0,resolutions[model].width,resolutions[model].height);
-    ctx.drawImage($('img').get(0), 0, 0);
+    startXlarge = ( ((resolutions[model].width - pascalLW.width)/2) * scaleLarge)
+    startYlarge = ( ((pascalLW.height - resolutions[model].height)/2) * scaleLarge)
+    startXsmall = (((pascalLW.height - resolutions[model].height)/2) * scaleSmall)
+    startYsmall = (((pascalLW.width - resolutions[model].width)/2) * scaleSmall)
+    console.log(startYlarge)
+    console.log(startYsmall)
+    //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+    ctx.drawImage(waterImg, startXlarge, 0);
+    ctx.drawImage(pascalImg, startXlarge, -startYsmall);
+    ctx.drawImage(lightImg, startXlarge, 0);
+
+    //reduce the drawing scale so the text bubble can fit in the window
+    ctx.scale(scaleSmall,scaleSmall)
+    ctx.drawImage(bubbleImg, startXsmall, -startYsmall);
+
     //refill text
     ctx.fillStyle = textColor;
+    ctx.font = textFont
     ctx.fillText(text,40,80);
   }
+  }
+  var quotes = []
+  var horizons = []
+  var leaf = []
+  var user = []
+  var r
+  fetch('quotes.json')
+  .then(response => response.json())
+  .then(data => {
+    quotes = data
+    horizons = quotes["Horizons"]
+    leaf = quotes["Leaf"]
+    user = quotes["User"]
+    loaded = true;
+    Create();
+  });
+
+  var resolutions = {
+    "iPhone X"  :  {
+      "width": 1125,
+      "height": 2436
+    },
+    "iPhone 8 Plus"  :  {
+      "width": 1080,
+      "height": 1920
+    }
+  }
+  $(document).on('input','.update',function(){
+    Create()
+  });
+  $('button').click(function(){
+    Create()
+  });
   </script>
 </html>
 </form>
@@ -138,12 +194,5 @@
 
 
 
-$(document).on('input','#inp',function(){
-    //redraw image
-    Create()
 
-});
-$('button').click(function(){
-    //console.log(ctx.getImageData(50, 50, 100, 100));
-});
 </script>
