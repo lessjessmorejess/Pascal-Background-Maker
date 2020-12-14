@@ -1,0 +1,26 @@
+{
+  "iPhone Xs Max/11 Pro Max"  : {
+    "width"  : 1242,
+    "height" : 2688
+  },
+  "iPhone Xr/11"        : {
+    "width"  : 828,
+    "height" : 1792
+  },
+  "iPhone X/Xs/11 Pro"  :  {
+    "width"  : 1125,
+    "height" : 2436
+  },
+  "iPhone 8+/7+/6s+/6+" :  {
+    "width"  : 1080,
+    "height" : 1920
+  },
+  "iPhone 8/7/6s/6"     : {
+    "width"  : 750,
+    "height" : 1334
+  },
+  "iPhone 5/5c/5s/SE"   : {
+    "width"  : 640,
+    "height" : 1136
+  }
+}

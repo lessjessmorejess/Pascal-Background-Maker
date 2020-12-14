@@ -2,21 +2,20 @@
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <style>
-  #sample{
-    width: 400px;
-    height:400px;
-    background: gray;
-  }
+
   </style>
 
 </head>
 <body>
   <label></label>
   <select id="resolution" class="update">
-     <optgroup label="iPhones">
-    <option value="iPhone X">iPhone X (1125 x 2436)</option>
-    <option value="iPhone 8 Plus">iPhone 8 Plus (1080 x 1920)</option>
-    <option value="3x4">3x4</option>
+   <optgroup label="iPhone">
+    <option value="iPhone Xs Max/11 Pro Max">iPhone Xs Max/11 Pro Max (1242 x 2688)</option>
+    <option value="iPhone Xr/11">iPhone Xr/11 (828 x 1792)</option>
+    <option value="iPhone X/Xs/11 Pro">iPhone X/Xs/11 Pro (1125 x 2436)</option>
+    <option value="iPhone 8+/7+/6s+/6+">iPhone 8+/7+/6s+/6+ (1080 x 1920)</option>
+    <option value="iPhone 8/7/6s/6">iPhone 8/7/6s/6 (750 x 1334)</option>
+    <option value="iPhone 5/5c/5s/SE">iPhone 5/5c/5s/SE (640 x 1136)</option>
   </select>
   <select id="position" class="update">
     <option value="0">Top Text</option>
@@ -34,32 +33,42 @@
   </select>
   <input id="inp" class="update" placeholder="Enter text here"></input>
   <button onclick="Create()">Make it, maaan</button>
-  <div id="imgConatiner">
-    <img id="img" src="assets/pascal.png" style="display:none" crossorigin="anonymous">
-    </div>
-  </div>
-  <canvas id="canvas" width="400" height="400"/>
+  <br>
+  <canvas id="canvas" />
 
 </body>
   <script>
+  //Initial declares
+  var quotes = []
+  var horizons = []
+  var leaf = []
+  var user = []
+  var r
   //Declare the foundational variables
   var pascalLW = {
       "width": 2048,
       "height": 2732
     };
-  var pascalImg = new Image();
-      pascalImg.src = "assets/pascal.png"
-  var lightImg = new Image();
-      lightImg.src = "assets/light.png"
+
+  //Get the images from the assets folder.
   var bubbleImg = new Image();
-      bubbleImg.src = "assets/bubble.png"
-  var waterImg = new Image();
-      waterImg.src = "assets/water.png"
+      bubbleImg.src = "assets/bubble_crop.png"
+  var pascalDayImg = new Image();
+      pascalDayImg.src = "assets/pascal_day.png"
+  var pascalNightImg = new Image();
+      pascalNightImg.src = "assets/pascal_night.png"
+  var lightDayImg = new Image();
+      lightDayImg.src = "assets/light_day.png"
+  var lightNightImg = new Image();
+      lightNightImg.src = "assets/light_night.png"
+  var waterDayImg = new Image();
+      waterDayImg.src = "assets/water_day.png"
+  var waterNightImg = new Image();
+      waterNightImg.src = "assets/water_night.png"
 
 
   var textColor = "#00cbda"
-  var textFont  = "100px Arial" //TODO make the font size dependant on the bubble size
-
+  var textFont  = "bold 90px Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
 
   var canvas = document.getElementById('canvas'),
         ctx = canvas.getContext('2d');
@@ -70,7 +79,7 @@
   var resolutionElement  = document.getElementById("resolution")
   var positionElement    = document.getElementById("position")
   var themeElement       = document.getElementById("theme")
-  var categoryElement       = document.getElementById("category")
+  var categoryElement    = document.getElementById("category")
 
   //Declare default values
   var text      = "Hey maaan."
@@ -79,86 +88,118 @@
   var position  = positionElement.value
   var theme     = themeElement.value
   var category  = categoryElement.value
-  function Create(){
+
+
+  function BuildFinal(){
+    //Get relevant variables
+      deviceW = resolutions[model].width
+      deviceH = resolutions[model].height
+      //scaleMatch should be the ratio to make the scaling 1:1
+      var scaleMatch = deviceH/pascalLW.height
+      //TODO figure out how scaleSmall is useful
+      var scaleSmall = deviceW/pascalLW.width
+
+      //These variables are for placing the images in the correct spot
+        startXlarge = (((deviceW - pascalLW.width)/2) * scaleMatch)
+        startYlarge = (((pascalLW.height - deviceH)/2) * scaleMatch)
+        startXsmall = (((pascalLW.height - deviceH)/2) * scaleSmall)
+        startYsmall = (((pascalLW.width  - deviceW)/2) * scaleSmall)
+
+    //Build the canvas
+      //Set the canvas dimensions & scale to match the selected model
+        canvas.setAttribute("width",  deviceW)
+        canvas.setAttribute("height", deviceH)
+        ctx.scale(scaleMatch, scaleMatch)
+        ctx.clearRect(0, 0, deviceW, deviceH);
+
+      //Draw the image layers
+      //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+        ctx.drawImage(thisWaterImg, startXlarge, 0);
+        ctx.drawImage(thisPascalImg, startXlarge, -startYsmall);
+        ctx.drawImage(thisLightImg, startXlarge, 0);
+
+      //change the drawing scale so the text bubble can fit properly in the window
+        ctx.scale(scaleSmall,scaleSmall)
+        ctx.drawImage(bubbleImg, 0, 0);
+
+        //refill text
+          ctx.fillStyle = textColor;
+          ctx.font = textFont
+          ctx.textBaseline = "top"
+          //fillText(text, x, y [, maxWidth]);
+          //TODO wrapping will need to be handled manually
+          //https://www.html5canvastutorials.com/tutorials/html5-canvas-wrap-text-tutorial/
+          //These values work when the bubble is at (0,0) and scale to the bubble properly with the size of the canvas
+
+          /*Currently testing the bubble with the following quote:
+            "Do Roosters go back to sleep after they wake everyone up? I mean, they're pretty much done for the day."
+            Reference image found here:
+            https://www.google.com/search?q=acnh+pascal&client=firefox-b-1-d&sxsrf=ALeKk00KEA5R_N5YMXepfQJzlnfStfvl4w:1607907023662&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiGjOi3oMztAhVSk1kKHTNDBbAQ_AUoAnoECBQQBA&biw=1680&bih=848#imgrc=FWamWedBGIxN8M
+          */
+          ctx.fillText(text, 150, 175);
+          ctx.fillText(text, 150, 300);
+          ctx.fillText(text, 150, 425);
+
+
+
+  }
+
+  function BuildPreview(){
+    //Generate the preview canvas
+    /*TODO  the preview needs to load in roughly the same space on the page.
+            it will need to scale appropriately to be accurate to the final
+            AND fit in the space provided.
+            Building the final will be easier, so this function calls that for now.
+    */
+    BuildFinal()
+  }
+
+  function ProcessVars(){
+
     if (loaded !== false){
+      //Pulls values from the interactive elements
+        inputText = submissionElement.value
+        model     = resolutionElement.value
+        position  = parseInt(positionElement.value)
+        theme     = parseInt(themeElement.value)
 
 
-    inputText = submissionElement.value
-    model     = resolutionElement.value
-    position  = positionElement.value
-    theme     = themeElement.value
-    r         = Math.random();
+      //If the user does not have text in the text input field
+        if (inputText === ""){
+          //generate a random number, apply that to the number of quotes in a section
+          //and deliver the corresponding number.
 
+          r = Math.random();
+          switch (category){
+            case "New Horizons":
+              chosenQuote = Math.floor(horizons.length * r)
+              text = horizons[chosenQuote];
+              break;
+            case "New Leaf":
+              chosenQuote = Math.floor(leaf.length * r)
+              text = leaf[chosenQuote];
+              break;
+            case "user":
+              chosenQuote = Math.floor(user.length * r)
+              text = user[chosenQuote];
+              break;
+          }
+        }
+        //Otherwise, use the user's input text.
+        else{
+          text = inputText
+        }
 
-    chosenQuote = Math.floor(horizons.length * r)
-    /*console.log("horizons[chosenQuote] is " + horizons[chosenQuote])
-    console.log("model is " + model)
-    console.log(resolutions[model].width)
-    console.log(resolutions[model].height)
-    console.log("resolutions[model] is ")
-    console.log(resolutions[model])
-    console.log("position is " + position)
-    console.log("theme is " + theme)*/
+      //Change the images used to render based on the user's selected theme
+        thisWaterImg  = theme ? waterNightImg  : waterDayImg;
+        thisPascalImg = theme ? pascalNightImg : pascalDayImg;
+        thisLightImg  = theme ? lightNightImg  : lightDayImg;
 
-    console.log("inputText is '" + inputText + "'")
-    if (inputText === ""){
-      console.log(category)
-      switch (category){
-        case "New Horizons":
-          text = horizons[chosenQuote];
-          break;
-        case "New Leaf":
-          text = leaf[chosenQuote];
-          break;
-        case "user":
-          text = user[chosenQuote];
-          break;
-      }
-
+      return
     }
-    else{
-      text = inputText
-    }
-    console.log("text is " + text)
-    if(theme == "1"){
-      //sample.style.color = "white"
-    }
-    else if(theme == "0"){
-      //sample.style.color = "black"
-    }
-    canvas.setAttribute("width",resolutions[model].width)
-    canvas.setAttribute("height",resolutions[model].height)
-    var scaleLarge = resolutions[model].height/pascalLW.height
-    var scaleSmall = resolutions[model].width/pascalLW.width
-    console.log((resolutions[model].width/pascalLW.width) * resolutions[model].height)
-    ctx.scale(scaleLarge,scaleLarge)
-    ctx.clearRect(0,0,resolutions[model].width,resolutions[model].height);
-    startXlarge = ( ((resolutions[model].width - pascalLW.width)/2) * scaleLarge)
-    startYlarge = ( ((pascalLW.height - resolutions[model].height)/2) * scaleLarge)
-    startXsmall = (((pascalLW.height - resolutions[model].height)/2) * scaleSmall)
-    startYsmall = (((pascalLW.width - resolutions[model].width)/2) * scaleSmall)
-    console.log(startYlarge)
-    console.log(startYsmall)
-    //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-    ctx.drawImage(waterImg, startXlarge, 0);
-    ctx.drawImage(pascalImg, startXlarge, -startYsmall);
-    ctx.drawImage(lightImg, startXlarge, 0);
-
-    //reduce the drawing scale so the text bubble can fit in the window
-    ctx.scale(scaleSmall,scaleSmall)
-    ctx.drawImage(bubbleImg, startXsmall, -startYsmall);
-
-    //refill text
-    ctx.fillStyle = textColor;
-    ctx.font = textFont
-    ctx.fillText(text,40,80);
   }
-  }
-  var quotes = []
-  var horizons = []
-  var leaf = []
-  var user = []
-  var r
+
+  //Get the JSON file of quotes and resolutions
   fetch('quotes.json')
   .then(response => response.json())
   .then(data => {
@@ -166,33 +207,31 @@
     horizons = quotes["Horizons"]
     leaf = quotes["Leaf"]
     user = quotes["User"]
-    loaded = true;
-    Create();
+
+    fetch('resolutions.json')
+    .then(r_response => r_response.json())
+    .then(r_data => {
+      resolutions = r_data
+      loaded = true;
+      ProcessVars();
+      BuildFinal()
+    });
   });
 
-  var resolutions = {
-    "iPhone X"  :  {
-      "width": 1125,
-      "height": 2436
-    },
-    "iPhone 8 Plus"  :  {
-      "width": 1080,
-      "height": 1920
-    }
-  }
+
+  //When an option is updated, update the preview
   $(document).on('input','.update',function(){
-    Create()
+    ProcessVars()
+    BuildFinal()
+    //TODO separate preview & final
+    //BuildPreview()
   });
+
+  //When the button submit is clicked, create the final result
   $('button').click(function(){
-    Create()
+    ProcessVars()
+    BuildFinal()
+
   });
   </script>
 </html>
-</form>
-<script>
-
-
-
-
-
-</script>
