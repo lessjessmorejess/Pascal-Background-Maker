@@ -32,7 +32,7 @@
     <option value="Random">Random</option>
   </select>
   <input id="inp" class="update" placeholder="Enter text here"></input>
-  <button onclick="Create()">Make it, maaan</button>
+  <button>Make it, maaan</button>
   <br>
   <canvas id="canvas" />
 
@@ -98,6 +98,13 @@
       var scaleMatch = deviceH/pascalLW.height
       //TODO figure out how scaleSmall is useful
       var scaleSmall = deviceW/pascalLW.width
+      //scaleBubble is made to fit the bubble to the screen
+      var scaleBubble = deviceW/bubbleImg.width;
+
+      console.log("bubbleImg.width is " + bubbleImg.width)
+      console.log("deviceW is " + deviceW)
+      console.log("scaleBubble is " + scaleBubble)
+      console.log("scaleMatch is " + scaleMatch)
 
       //These variables are for placing the images in the correct spot
         startXlarge = (((deviceW - pascalLW.width)/2) * scaleMatch)
@@ -109,6 +116,7 @@
       //Set the canvas dimensions & scale to match the selected model
         canvas.setAttribute("width",  deviceW)
         canvas.setAttribute("height", deviceH)
+
         ctx.scale(scaleMatch, scaleMatch)
         ctx.clearRect(0, 0, deviceW, deviceH);
 
@@ -119,7 +127,10 @@
         ctx.drawImage(thisLightImg, startXlarge, 0);
 
       //change the drawing scale so the text bubble can fit properly in the window
-        ctx.scale(scaleSmall,scaleSmall)
+
+        //the current scale must be undone to properly scale the bubble.
+        ctx.scale(1/scaleMatch,1/scaleMatch)
+        ctx.scale(scaleBubble,scaleBubble)
         ctx.drawImage(bubbleImg, 0, 0);
 
         //refill text
@@ -136,6 +147,21 @@
             Reference image found here:
             https://www.google.com/search?q=acnh+pascal&client=firefox-b-1-d&sxsrf=ALeKk00KEA5R_N5YMXepfQJzlnfStfvl4w:1607907023662&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiGjOi3oMztAhVSk1kKHTNDBbAQ_AUoAnoECBQQBA&biw=1680&bih=848#imgrc=FWamWedBGIxN8M
           */
+          var words = text.split(' ');
+          var line = '';
+
+          for(var n = 0; n < words.length; n++) {
+            var testLine = line + words[n] + ' ';
+            var metrics = context.measureText(testLine);
+            var testWidth = metrics.width;
+            if (testWidth > maxWidth && n > 0) {
+              context.fillText(line, x, y);
+              line = words[n] + ' ';
+              y += lineHeight;
+            }
+            else {
+              line = testLine;
+            }
           ctx.fillText(text, 150, 175);
           ctx.fillText(text, 150, 300);
           ctx.fillText(text, 150, 425);
