@@ -32,8 +32,10 @@
     <option value="Random">Random</option>
   </select>
   <input id="inp" class="update" placeholder="Enter text here"></input>
+  <button id="newQuote">Hit me</button>
   <button>Make it, maaan</button>
   <br>
+  <h1 id="quote"></h1>
   <canvas id="canvas" />
 
 </body>
@@ -68,7 +70,7 @@
 
 
   var textColor = "#00cbda"
-  var textFont  = "bold 90px Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
+  var textFont  = "bold 85px Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
 
   var canvas = document.getElementById('canvas'),
         ctx = canvas.getContext('2d');
@@ -91,6 +93,7 @@
 
 
   function BuildFinal(){
+      document.getElementById("quote").textContent = "'" + text + "'"
     //Get relevant variables
       deviceW = resolutions[model].width
       deviceH = resolutions[model].height
@@ -137,6 +140,8 @@
           ctx.fillStyle = textColor;
           ctx.font = textFont
           ctx.textBaseline = "top"
+
+
           //fillText(text, x, y [, maxWidth]);
           //TODO wrapping will need to be handled manually
           //https://www.html5canvastutorials.com/tutorials/html5-canvas-wrap-text-tutorial/
@@ -147,24 +152,14 @@
             Reference image found here:
             https://www.google.com/search?q=acnh+pascal&client=firefox-b-1-d&sxsrf=ALeKk00KEA5R_N5YMXepfQJzlnfStfvl4w:1607907023662&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiGjOi3oMztAhVSk1kKHTNDBbAQ_AUoAnoECBQQBA&biw=1680&bih=848#imgrc=FWamWedBGIxN8M
           */
-          var words = text.split(' ');
-          var line = '';
+          var testLine = "Do Roosters go back to sleep after they wake everyone up? I mean, they're pretty much done for the day."
 
-          for(var n = 0; n < words.length; n++) {
-            var testLine = line + words[n] + ' ';
-            var metrics = context.measureText(testLine);
-            var testWidth = metrics.width;
-            if (testWidth > maxWidth && n > 0) {
-              context.fillText(line, x, y);
-              line = words[n] + ' ';
-              y += lineHeight;
-            }
-            else {
-              line = testLine;
-            }
-          ctx.fillText(text, 150, 175);
-          ctx.fillText(text, 150, 300);
-          ctx.fillText(text, 150, 425);
+          //TODO allow the user to adjust the maxLength, and maybe even the font size?
+          //There's no way to ensure that all text will always fit perfectly
+          var lines = wrapLines(text,38,3)
+          ctx.fillText(lines[0], 150, 175);
+          ctx.fillText(lines[1], 150, 300);
+          ctx.fillText(lines[2], 150, 425);
 
 
 
@@ -194,8 +189,6 @@
         if (inputText === ""){
           //generate a random number, apply that to the number of quotes in a section
           //and deliver the corresponding number.
-
-          r = Math.random();
           switch (category){
             case "New Horizons":
               chosenQuote = Math.floor(horizons.length * r)
@@ -225,6 +218,95 @@
     }
   }
 
+  function getRandomItem(item){
+    //TODO: some quotes call for random items. Examples are:
+    /* fruit, object, sweet food, savory food, doing random hobby*/
+  }
+  //TODO: This doesn't account for quotes that may be too short
+  function wrapLines(string,maxLength,numberOfLines){
+    var line = []
+    if (string.length > maxLength){
+      //console.log("wrapping");
+      //Get an array of the string by word
+      //Create a working string variable
+      var tempString = string;
+      //If tempString starts with a space, keeping removing spaces until it does not.
+          while (tempString.substring(0,1) == " "){
+            tempString = tempString.substring(1,tempString.length)
+          }
+      var strSpaceless = tempString.split(" ");
+      //console.log(strSpaceless)
+
+
+      //For each line until max lines are hit, do the following
+      for (lineNum = 0; lineNum < numberOfLines; lineNum++){
+        //console.log("currently on lineNum " + lineNum)
+        //console.log(line[lineNum])
+        //At the beginning of each line, set linebreak to false
+        var linebreak = false;
+        //set chars back to zero as the tempString is shortened on each line
+        var chars = 0;
+
+        //If tempString starts with a space, keeping removing spaces until it does not.
+        while (tempString.substring(0,1) == " "){
+          tempString = tempString.substring(1,tempString.length)
+        }
+
+        //If it's not the last line, try to break the line.
+        if (lineNum !== (numberOfLines-1)){
+
+          //Itterate through all the words until a word would meet the linebreak requirements
+          for (word = 0; linebreak != true;){
+            //This line of code is useless, but I don't know why
+
+            //Get the length of the current word
+            tempCharCount = strSpaceless[word].length;
+              console.log(strSpaceless[word] +" is this many characters long: " + tempCharCount)
+              console.log("tempCharCount is " + tempCharCount)
+              console.log("chars is " + chars)
+
+            //If this word does not break the line check if adding a space would break the line.
+            if ((tempCharCount + chars) < maxLength){
+              tempCharCount += 1;
+              //If adding a space does not break the line, add the length word & the space to chars
+              if ((tempCharCount + chars) <= maxLength){
+                chars += tempCharCount
+              }
+              //If the space breaks the line, just add the word and break the line
+              else{
+                chars += tempCharCount
+                linebreak = true;
+              }
+            }
+            //If the word would break the line, break the line
+            else{
+              linebreak = true;
+              //Add the current temptString to the current line based on the number of characters of words that fit.
+              line.push(tempString.substring(0,chars));
+              //If this line is empty
+              if (line[lineNum] === ""){
+                line[lineNum] = tempString.substring(0,strSpaceless[0].length + 1);
+              }
+              //update the temp string to omit this line
+              tempString = tempString.replace(line[lineNum],"")
+              if (tempString)
+              //Update the word array to omit this line.
+              strSpaceless = tempString.split(" ");
+            }
+            word++;
+          }
+        }
+        //If it's the last line, just place the rest of the text.
+        else{
+          line.push(tempString);
+        }
+        console.log("finished with lineNum " + lineNum)
+        console.log("'" + line[lineNum] + "'")
+      }
+      return line;
+    }
+  }
+
   //Get the JSON file of quotes and resolutions
   fetch('quotes.json')
   .then(response => response.json())
@@ -239,6 +321,7 @@
     .then(r_data => {
       resolutions = r_data
       loaded = true;
+      r = Math.random()
       ProcessVars();
       BuildFinal()
     });
@@ -252,6 +335,10 @@
     //TODO separate preview & final
     //BuildPreview()
   });
+  $('#newQuote').click(function(){
+    r = Math.random()
+    ProcessVars()
+  })
 
   //When the button submit is clicked, create the final result
   $('button').click(function(){
