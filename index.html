@@ -2,17 +2,41 @@
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <style>
+  @font-face {
+    font-family: 'Rounded';
+    src: url("arlrdbd.ttf");
+  }
+  :root{
+    font-family: 'Rounded', Arial, Helvetical, sans-serif;
+  }
   h1{
     text-align: center;
   }
-  .optionCat{
+  .options{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: .75em;
+  }
+  .optionCat, .miniCat{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3em auto;
     grid-gap: .5em;
+  }
+  .minCat{
+    grid-template-rows: 2.5em auto;
+    position: relative;
   }
   .optionCat :is(h2,h3){
     grid-column: span 2;
     text-align: center;
+    margin: .75em 0 .5em 0px;
+  }
+  .optionCat h3{
+    grid-column: span 2;
+    text-align: center;
+    margin: .75em 0 .25em 0px;
   }
   .subOptionCat{
     display: grid;
@@ -39,6 +63,25 @@
     grid-auto-flow: row;
     justify-content: center;
     text-align: center;
+  }
+  .history{
+    position: absolute;
+    top: 2.5em;
+    left: 0px;
+    overflow: hidden;
+    grid-column: span 2;
+    margin: 0px;
+    max-height: 9.8em;
+  }
+  .historyShade{
+    position: absolute;
+    top: 2.5em;
+    left: 0px;
+    width: 100%;
+    grid-column: span 2;
+    height: 9.8em;
+    background: linear-gradient(0, rgba(255,255,255,1), rgba(255,255,255,0));
+    z-index: 100;
   }
   </style>
 
@@ -84,7 +127,7 @@
       <label for="newQuote">New Quote:</label>
       <button id="newQuote" name="newQuote">Hit me</button>
     </div>
-    <div class="optionCat">
+    <div class="optionCat minCat">
       <h3>Fine adjustments</h3>
       <div id="fontSize" class="increments subOptionCat"><label>Adjust Font Size:</label>
         <button id="fontUp"   class="font arrow up">^</button>
@@ -97,13 +140,17 @@
         <button id="widthDown" class="width arrow down">v</button>
       </div>
     </div>
+    <div class="optionCat minCat">
+      <h3>Quote History</h3>
+      <div class="historyShade"></div>
+      <ul id="quoteHistory" class="history"></ul>
+    </div>
   </div>
   <button id="finalize" class="bigBtn">Make it, maaan</button>
   <div class="preview">
     <h1 id="quote"></h1>
     <!-- //TODO: this could be a history field that is hidden until clicked to go through the history -->
     <canvas id="canvas" style="display:block; margin: auto;"/></canvas>
-    <h6 id="quoteHistory"></h6>
   </div>
 
 </body>
@@ -144,7 +191,7 @@
   var fontYPadding = 175;
   var fontYLinePadding = 125;
   var bubbleYBuffer = 30;
-  var textFont  = "bold " + fontSizePx + "px Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
+  var textFont  = "bold " + fontSizePx + "px Rounded, Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
 
   var canvas = document.getElementById('canvas'),
         ctx = canvas.getContext('2d');
@@ -241,7 +288,7 @@
 
             checkAndReplaceRandomItem(quote)
             var lines = wrapLines(text,lineWidth,3)
-            console.log(`lines length = ${lines}`)
+            //console.log(`lines length = ${lines}`)
             ctx.fillText(lines[0], fontXPadding, bubbleYPos + fontYPadding);
             if (lines.length > 1) ctx.fillText(lines[1], fontXPadding, bubbleYPos + fontYPadding + fontYLinePadding);
             if (lines.length > 2) ctx.fillText(lines[2], fontXPadding, bubbleYPos + fontYPadding + (2*fontYLinePadding));
@@ -272,7 +319,7 @@
         theme       = parseInt(themeElement.value)
 
       //Get the values from Increment()
-      textFont  = "bold " + fontSizePx + "px Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
+      textFont  = "bold " + fontSizePx + "px Rounded, Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
 
 
       //If the user does not have text in the text input field
