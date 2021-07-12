@@ -2,41 +2,109 @@
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <style>
-
+  h1{
+    text-align: center;
+  }
+  .optionCat{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: .5em;
+  }
+  .optionCat :is(h2,h3){
+    grid-column: span 2;
+    text-align: center;
+  }
+  .subOptionCat{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: .3em;
+    grid-column: span 2;
+    text-align: center;
+  }
+  .subOptionCat > label{
+    align-content: center;
+    display: grid;
+    grid-row: span 3;
+    text-align: left;
+  }
+  .bigBtn{
+    margin: 1em auto;
+    padding: .5em 1em;
+    display: block;
+    font-size: 2rem;
+  }
+  .preview{
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+    text-align: center;
+  }
   </style>
 
 </head>
 <body>
-  <label></label>
-  <select id="resolution" class="update">
-   <optgroup label="iPhone">
-    <option value="iPhone Xs Max/11 Pro Max">iPhone Xs Max/11 Pro Max (1242 x 2688)</option>
-    <option value="iPhone Xr/11">iPhone Xr/11 (828 x 1792)</option>
-    <option value="iPhone X/Xs/11 Pro">iPhone X/Xs/11 Pro (1125 x 2436)</option>
-    <option value="iPhone 8+/7+/6s+/6+">iPhone 8+/7+/6s+/6+ (1080 x 1920)</option>
-    <option value="iPhone 8/7/6s/6">iPhone 8/7/6s/6 (750 x 1334)</option>
-    <option value="iPhone 5/5c/5s/SE">iPhone 5/5c/5s/SE (640 x 1136)</option>
-  </select>
-  <select id="position" class="update">
-    <option value="0">Top Text</option>
-    <option value="1">Bottom Text</option>
-  </select>
-  <select id="theme" class="update">
-    <option value="0">Light</option>
-    <option value="1">Dark</option>
-  </select>
-  <select id="category" class="update">Category
-    <option value="New Horizons">New Horizons</option>
-    <option value="New Leaf">New Leaf</option>
-    <option value="User">User</option>
-    <option value="Random">Random</option>
-  </select>
-  <input id="inp" class="update" placeholder="Enter text here"></input>
-  <button id="newQuote">Hit me</button>
-  <button>Make it, maaan</button>
-  <br>
-  <h1 id="quote"></h1>
-  <canvas id="canvas" />
+  <h1>Pascal Background Maker</h1>
+  <div class="options">
+    <div class="optionCat">
+      <h2>General Options</h2>
+      <label for="resolution">Device:</label>
+      <select id="resolution" name="resolution" class="update">
+       <optgroup label="iPhone">
+        <option value="iPhone Xs Max/11 Pro Max">iPhone Xs Max/11 Pro Max (1242 x 2688)</option>
+        <option value="iPhone Xr/11">iPhone Xr/11 (828 x 1792)</option>
+        <option value="iPhone X/Xs/11 Pro">iPhone X/Xs/11 Pro (1125 x 2436)</option>
+        <option value="iPhone 8+/7+/6s+/6+">iPhone 8+/7+/6s+/6+ (1080 x 1920)</option>
+        <option value="iPhone 8/7/6s/6">iPhone 8/7/6s/6 (750 x 1334)</option>
+        <option value="iPhone 5/5c/5s/SE">iPhone 5/5c/5s/SE (640 x 1136)</option>
+      </select>
+      <label for="theme">Theme:</label>
+      <select id="theme" name="theme" class="update">
+        <option value="0">Light</option>
+        <option value="1">Dark</option>
+      </select>
+    </div>
+    <div class="optionCat">
+      <h2>Bubble Options</h2>
+      <label for="position">Bubble Position:</label>
+      <select id="position" name="position" class="update">
+        <option value="0">Top Text</option>
+        <option value="1">Bottom Text</option>
+        <option value="2">Hidden</option>
+      </select>
+      <label for="category">Quote Category:</label>
+      <select id="category" name="category" class="update">Category
+        <option value="New Horizons">New Horizons</option>
+        <option value="New Leaf">New Leaf</option>
+        <option value="User">User</option>
+        <option value="Random">Random</option>
+      </select>
+      <label for="inp">Custom Quote:</label>
+      <input id="inp" name="inp" class="update" placeholder="Enter text here"></input>
+      <label for="newQuote">New Quote:</label>
+      <button id="newQuote" name="newQuote">Hit me</button>
+    </div>
+    <div class="optionCat">
+      <h3>Fine adjustments</h3>
+      <div id="fontSize" class="increments subOptionCat"><label>Adjust Font Size:</label>
+        <button id="fontUp"   class="font arrow up">^</button>
+        <span   id="fontNum"  class="number">85</span>
+        <button id="fontDown" class="font arrow down">v</button>
+      </div>
+      <div id="lineWidth" class="increments subOptionCat"><label>Adjust Line Width:</label>
+        <button id="widthUp"   class="width arrow up">^</button>
+        <span   id="widthNum"  class="number">38</span>
+        <button id="widthDown" class="width arrow down">v</button>
+      </div>
+    </div>
+  </div>
+  <button id="finalize" class="bigBtn">Make it, maaan</button>
+  <div class="preview">
+    <h1 id="quote"></h1>
+    <!-- //TODO: this could be a history field that is hidden until clicked to go through the history -->
+    <canvas id="canvas" style="display:block; margin: auto;"/></canvas>
+    <h6 id="quoteHistory"></h6>
+  </div>
 
 </body>
   <script>
@@ -70,7 +138,13 @@
 
 
   var textColor = "#00cbda"
-  var textFont  = "bold 85px Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
+  var fontSizePx = 85;
+  var lineWidth = 35;
+  var fontXPadding = 150;
+  var fontYPadding = 175;
+  var fontYLinePadding = 125;
+  var bubbleYBuffer = 30;
+  var textFont  = "bold " + fontSizePx + "px Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
 
   var canvas = document.getElementById('canvas'),
         ctx = canvas.getContext('2d');
@@ -82,43 +156,56 @@
   var positionElement    = document.getElementById("position")
   var themeElement       = document.getElementById("theme")
   var categoryElement    = document.getElementById("category")
+  var fontSizeDisplay    = document.getElementById("fontNum")
+  var lineWidthDisplay   = document.getElementById("widthNum")
 
   //Declare default values
-  var text      = "Hey maaan."
-  var inputText = submissionElement.value
-  var model     = resolutionElement.value
-  var position  = positionElement.value
-  var theme     = themeElement.value
-  var category  = categoryElement.value
+  var text          = "Hey maaan."
+  var quoteHistory  = []
+  var inputText     = submissionElement.value
+  var model         = resolutionElement.value
+  var position      = positionElement.value
+  var theme         = themeElement.value
+  var category      = categoryElement.value
 
 
   function BuildFinal(){
       document.getElementById("quote").textContent = "'" + text + "'"
+      console.log("received text" + text)
     //Get relevant variables
       deviceW = resolutions[model].width
       deviceH = resolutions[model].height
+      deviceNotchH = resolutions[model].notchHeight || 0
+      //console.log("I would like to set dockHeight to " + Math.floor(deviceH * 0.12))
+      dockHeight = Math.floor(deviceH * .12);
       //scaleMatch should be the ratio to make the scaling 1:1
-      var scaleMatch = deviceH/pascalLW.height
-      //TODO figure out how scaleSmall is useful
-      var scaleSmall = deviceW/pascalLW.width
+      var scaleMatch = deviceH/thisPascalImg.height
+      // Currently this var is not used
+      var scaleSmall = deviceW/thisPascalImg.width
       //scaleBubble is made to fit the bubble to the screen
       var scaleBubble = deviceW/bubbleImg.width;
 
-      console.log("bubbleImg.width is " + bubbleImg.width)
-      console.log("deviceW is " + deviceW)
-      console.log("scaleBubble is " + scaleBubble)
-      console.log("scaleMatch is " + scaleMatch)
+      //console.log("bubbleImg.width is " + bubbleImg.width)
+      //console.log("deviceW is " + deviceW)
+      //console.log("scaleBubble is " + scaleBubble)
+      //console.log("scaleMatch is " + scaleMatch)
+      //console.log("scaleSmall is " + scaleSmall)
 
       //These variables are for placing the images in the correct spot
-        startXlarge = (((deviceW - pascalLW.width)/2) * scaleMatch)
+        startXlarge = ((deviceW * (1/scaleMatch))/2 - (pascalLW.width/2))
         startYlarge = (((pascalLW.height - deviceH)/2) * scaleMatch)
-        startXsmall = (((pascalLW.height - deviceH)/2) * scaleSmall)
+        startXsmall = (((pascalLW.height - deviceH)/2) * scaleSmall);
         startYsmall = (((pascalLW.width  - deviceW)/2) * scaleSmall)
+        if (position === 1){
+          startYsmall = -startYsmall
+        }
 
     //Build the canvas
       //Set the canvas dimensions & scale to match the selected model
         canvas.setAttribute("width",  deviceW)
         canvas.setAttribute("height", deviceH)
+
+        //TODO: Shrink the preview size in a way that lets everything scale appropriately
 
         ctx.scale(scaleMatch, scaleMatch)
         ctx.clearRect(0, 0, deviceW, deviceH);
@@ -126,40 +213,39 @@
       //Draw the image layers
       //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         ctx.drawImage(thisWaterImg, startXlarge, 0);
-        ctx.drawImage(thisPascalImg, startXlarge, -startYsmall);
+        ctx.drawImage(thisPascalImg, startXlarge, startYsmall);
+
         ctx.drawImage(thisLightImg, startXlarge, 0);
 
       //change the drawing scale so the text bubble can fit properly in the window
 
         //the current scale must be undone to properly scale the bubble.
-        ctx.scale(1/scaleMatch,1/scaleMatch)
-        ctx.scale(scaleBubble,scaleBubble)
-        ctx.drawImage(bubbleImg, 0, 0);
+        ctx.scale(1/scaleMatch,1/scaleMatch);
 
-        //refill text
-          ctx.fillStyle = textColor;
-          ctx.font = textFont
-          ctx.textBaseline = "top"
+        if (position !== 2){
+          ctx.scale(scaleBubble,scaleBubble);
+          bubbleYPos = 0;
+          if (position){
+            bubbleYPos = deviceH/scaleBubble - bubbleImg.height - dockHeight/scaleBubble + deviceNotchH
+          }
+          else bubbleYPos = deviceNotchH + bubbleYBuffer
 
 
-          //fillText(text, x, y [, maxWidth]);
-          //TODO wrapping will need to be handled manually
-          //https://www.html5canvastutorials.com/tutorials/html5-canvas-wrap-text-tutorial/
-          //These values work when the bubble is at (0,0) and scale to the bubble properly with the size of the canvas
+          ctx.drawImage(bubbleImg, 0, bubbleYPos);
 
-          /*Currently testing the bubble with the following quote:
-            "Do Roosters go back to sleep after they wake everyone up? I mean, they're pretty much done for the day."
-            Reference image found here:
-            https://www.google.com/search?q=acnh+pascal&client=firefox-b-1-d&sxsrf=ALeKk00KEA5R_N5YMXepfQJzlnfStfvl4w:1607907023662&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiGjOi3oMztAhVSk1kKHTNDBbAQ_AUoAnoECBQQBA&biw=1680&bih=848#imgrc=FWamWedBGIxN8M
-          */
-          var testLine = "Do Roosters go back to sleep after they wake everyone up? I mean, they're pretty much done for the day."
 
-          //TODO allow the user to adjust the maxLength, and maybe even the font size?
-          //There's no way to ensure that all text will always fit perfectly
-          var lines = wrapLines(text,38,3)
-          ctx.fillText(lines[0], 150, 175);
-          ctx.fillText(lines[1], 150, 300);
-          ctx.fillText(lines[2], 150, 425);
+          //refill text
+            ctx.fillStyle = textColor;
+            ctx.font = textFont
+            ctx.textBaseline = "top"
+
+            checkAndReplaceRandomItem(quote)
+            var lines = wrapLines(text,lineWidth,3)
+            console.log(`lines length = ${lines}`)
+            ctx.fillText(lines[0], fontXPadding, bubbleYPos + fontYPadding);
+            if (lines.length > 1) ctx.fillText(lines[1], fontXPadding, bubbleYPos + fontYPadding + fontYLinePadding);
+            if (lines.length > 2) ctx.fillText(lines[2], fontXPadding, bubbleYPos + fontYPadding + (2*fontYLinePadding));
+          }
 
 
 
@@ -175,17 +261,23 @@
     BuildFinal()
   }
 
-  function ProcessVars(){
+  function ProcessVars(historyQuote){
 
     if (loaded !== false){
       //Pulls values from the interactive elements
-        inputText = submissionElement.value
-        model     = resolutionElement.value
-        position  = parseInt(positionElement.value)
-        theme     = parseInt(themeElement.value)
+        if (historyQuote === "") inputText   = submissionElement.value;
+        else if (historyQuote !== "") inputText = historyQuote;
+        model       = resolutionElement.value
+        position    = parseInt(positionElement.value)
+        theme       = parseInt(themeElement.value)
+
+      //Get the values from Increment()
+      textFont  = "bold " + fontSizePx + "px Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
 
 
       //If the user does not have text in the text input field
+      console.log(`history: ${historyQuote}`)
+      console.log(`inputText: ${inputText}`)
         if (inputText === ""){
           //generate a random number, apply that to the number of quotes in a section
           //and deliver the corresponding number.
@@ -205,9 +297,13 @@
           }
         }
         //Otherwise, use the user's input text.
-        else{
+        else if(inputText !== ""){
           text = inputText
         }
+        quoteHistory.push(text)
+        document.getElementById("quoteHistory").innerHTML += `<li onClick="useHistoricQuote(${quoteHistory.length - 1})">${text}</li>`;
+
+        //TODO: Build interaction with quote history
 
       //Change the images used to render based on the user's selected theme
         thisWaterImg  = theme ? waterNightImg  : waterDayImg;
@@ -217,14 +313,52 @@
       return
     }
   }
-
-  function getRandomItem(item){
-    //TODO: some quotes call for random items. Examples are:
-    /* fruit, object, sweet food, savory food, doing random hobby*/
+  function Increment(classes){
+    console.log(classes)
+    //This is bad but I'm lazy
+    var direction = classes[2];
+    var type = classes[0];
+    console.log(type)
+    console.log(direction)
+    if (type == "font"){
+      if (direction === "up"){
+        fontSizePx++
+      }
+      if (direction === "down"){
+        fontSizePx--
+      }
+      if (fontSizePx < 50) fontSizePx = 50;
+      if (fontSizePx > 150) fontSizePx = 150;
+      fontSizeDisplay.textContent = fontSizePx
+    }
+    if (type == "width"){
+      if (direction === "up"){
+        lineWidth++
+      }
+      if (direction === "down"){
+        lineWidth--
+      }
+      if (lineWidth <20) lineWidth = 20;
+      if (lineWidth >100) lineWidth = 100;
+      lineWidthDisplay.textContent = lineWidth
+    }
+    return;
   }
-  //TODO: This doesn't account for quotes that may be too short
+  function checkAndReplaceRandomItem(quote){
+    //TODO: some quotes call for random items. Examples are:
+    /*
+    <random sweet food>
+    <doing random hobby>
+    <random savory food>
+    <a native fruit>
+    <random object>
+    */
+    return quote
+  }
+
   function wrapLines(string,maxLength,numberOfLines){
     var line = []
+    //If the string is longer than the maxlength, try to break it into different lines
     if (string.length > maxLength){
       //console.log("wrapping");
       //Get an array of the string by word
@@ -240,6 +374,7 @@
 
       //For each line until max lines are hit, do the following
       for (lineNum = 0; lineNum < numberOfLines; lineNum++){
+
         //console.log("currently on lineNum " + lineNum)
         //console.log(line[lineNum])
         //At the beginning of each line, set linebreak to false
@@ -256,14 +391,15 @@
         if (lineNum !== (numberOfLines-1)){
 
           //Itterate through all the words until a word would meet the linebreak requirements
-          for (word = 0; linebreak != true;){
+          for (word = 0; linebreak != true && word < strSpaceless.length;){
+            console.log(`strSpaceless length: ${strSpaceless.length}`)
             //This line of code is useless, but I don't know why
 
             //Get the length of the current word
             tempCharCount = strSpaceless[word].length;
-              console.log(strSpaceless[word] +" is this many characters long: " + tempCharCount)
-              console.log("tempCharCount is " + tempCharCount)
-              console.log("chars is " + chars)
+              //console.log(strSpaceless[word] +" is this many characters long: " + tempCharCount)
+              //console.log("tempCharCount is " + tempCharCount)
+              //console.log("chars is " + chars)
 
             //If this word does not break the line check if adding a space would break the line.
             if ((tempCharCount + chars) < maxLength){
@@ -289,9 +425,9 @@
               }
               //update the temp string to omit this line
               tempString = tempString.replace(line[lineNum],"")
-              if (tempString)
+              //if (tempString)
               //Update the word array to omit this line.
-              strSpaceless = tempString.split(" ");
+              if (strSpaceless !== undefined) strSpaceless = tempString.split(" ");
             }
             word++;
           }
@@ -305,6 +441,16 @@
       }
       return line;
     }
+    //If the string is only one line, just return it as a JSON
+    else {
+      line.push(string)
+      return line;
+    }
+  }
+
+  function useHistoricQuote(num){
+    ProcessVars(quoteHistory[num])
+    BuildFinal();
   }
 
   //Get the JSON file of quotes and resolutions
@@ -322,7 +468,7 @@
       resolutions = r_data
       loaded = true;
       r = Math.random()
-      ProcessVars();
+      ProcessVars("");
       BuildFinal()
     });
   });
@@ -330,19 +476,30 @@
 
   //When an option is updated, update the preview
   $(document).on('input','.update',function(){
-    ProcessVars()
+    ProcessVars("")
     BuildFinal()
     //TODO separate preview & final
     //BuildPreview()
   });
   $('#newQuote').click(function(){
+    console.log("hit")
     r = Math.random()
-    ProcessVars()
+    ProcessVars("")
+    BuildFinal()
+    //TODO separate preview & final
+    //BuildPreview()
+  })
+  $('.arrow').click(function(){
+    Increment(this.classList)
+    ProcessVars("")
+    BuildFinal()
+    //TODO separate preview & final
+    //BuildPreview()
   })
 
   //When the button submit is clicked, create the final result
-  $('button').click(function(){
-    ProcessVars()
+  $('#finalize').click(function(){
+    ProcessVars("")
     BuildFinal()
 
   });
