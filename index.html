@@ -30,14 +30,41 @@
   }
   @keyframes highlight {
     from {
-      background: linear-gradient(to right, var(--accent-bubble-hli-color) 60%, var(--accent-bubble-hl-color) 50%);
-      background-size: 200% 100%;
+      width: 0%;
       background-position:left bottom;
+      background-repeat: no-repeat;
     }
     to {
-      background-size: 100% 100%;
-      background-position:left bottom;
+      width: calc(100% + 1em);
     }
+  }
+  .highlight{
+    position: relative;
+    z-index: 10;
+    width: fit-content;
+    margin: auto;
+  }
+  .highlight::after{
+    display: block;
+    background: black;
+    content:"";
+    position: absolute;
+    border-radius: 1em;
+    left: -0.5em;
+    top: 45%;
+    height: .85em;
+    z-index: -1;
+  }
+  .up .highlight:after{
+    bottom: unset;
+    top: 0%;
+  }
+  .highlight:hover::after{
+    background: var(--accent-bubble-hl-color);
+    display: block;
+    content: "";
+    animation: highlight .3s cubic-bezier(0.35, 0, 0.94, 0.21);
+    animation-fill-mode: forwards;
   }
   h1{
     text-align: center;
@@ -104,17 +131,21 @@
     font-family: var(--main-font-family);
     font-size: 1.25em;
   }
-  .arrow:is(:focus, :hover){
-    /*background-color: var(--accent-bubble-hl-color);*/
-    animation: highlight 1s ease;
-
-  }
   .arrow.up{
     -moz-transform: scale(1, -1);
     -webkit-transform: scale(1, -1);
     -o-transform: scale(1, -1);
     -ms-transform: scale(1, -1);
     transform: scale(1, -1);
+  }
+  .btn{
+    background: var(--accent-bubble-color);
+    color: var(--accent-bubble-text-color);
+    border-radius: var(--border-radius);
+    border: none;
+    padding: .25em .5em;
+    display: block;
+    font-size: 1.2rem;
   }
   .bigBtn{
     margin: 1em auto;
@@ -195,22 +226,22 @@
       <label for="inp">Custom Quote:</label>
       <input id="inp" name="inp" class="update" placeholder="Enter text here"></input>
       <label for="newQuote">New Quote:</label>
-      <button id="newQuote" name="newQuote">Hit me</button>
+      <button id="newQuote" class="btn" name="newQuote"><p class="highlight">Hit me!</p></button>
     </div>
     <div class="optionCat minCat">
       <h3>Fine adjustments</h3>
       <div id="fontSize" class="increments subOptionCat"><label>Adjust Font Size:</label>
         <div class="arrowContainer">
-          <button id="fontUp"   class="font arrow up">v</button>
+          <button id="fontUp"   class="font arrow up"><p class="highlight">v</p></button>
           <span   id="fontNum"  class="number">85</span>
-          <button id="fontDown" class="font arrow down">v</button>
+          <button id="fontDown" class="font arrow down"><p class="highlight">v</p></button>
         </div>
       </div>
       <div id="lineWidth" class="increments subOptionCat"><label>Adjust Line Width:</label>
         <div class="arrowContainer">
-          <button id="widthUp"   class="width arrow up">v</button>
+          <button id="widthUp"   class="width arrow up"><p class="highlight">v</p></button>
           <span   id="widthNum"  class="number">38</span>
-          <button id="widthDown" class="width arrow down">v</button>
+          <button id="widthDown" class="width arrow down"><p class="highlight">v</p></button>
         </div>
       </div>
     </div>
@@ -220,7 +251,7 @@
       <ul id="quoteHistory" class="history"></ul>
     </div>
   </div>
-  <button id="finalize" class="bigBtn">Make it, maaan</button>
+  <button id="finalize" class="btn bigBtn"><p class="highlight">Make it, maaan</p></button>
   <div class="preview">
     <h4 id="quote"></h4>
     <!-- //TODO: this could be a history field that is hidden until clicked to go through the history -->
@@ -421,10 +452,12 @@
         else if(inputText !== ""){
           text = inputText
         }
-        quoteHistory.push(text)
-        document.getElementById("quoteHistory").innerHTML += `<li onClick="useHistoricQuote(${quoteHistory.length - 1})">${text}</li>`;
+        if (text !== quoteHistory[quoteHistory.length - 1] || quoteHistory.length === 0){
+          console.log(`last quote: ${quoteHistory[quoteHistory.length - 1]}`)
+          quoteHistory.push(text)
+          document.getElementById("quoteHistory").innerHTML += `<li onClick="useHistoricQuote(${quoteHistory.length - 1})">${text}</li>`;
+        }
 
-        //TODO: Build interaction with quote history
 
       //Change the images used to render based on the user's selected theme
         thisWaterImg  = theme ? waterNightImg  : waterDayImg;
