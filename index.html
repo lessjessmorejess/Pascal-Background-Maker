@@ -6,11 +6,48 @@
     font-family: 'Rounded';
     src: url("arlrdbd.ttf");
   }
+
   :root{
-    font-family: 'Rounded', Arial, Helvetical, sans-serif;
+    --main-font-family:         'Rounded', Arial, Helvetical, sans-serif;
+    --main-font-color-1:        #7c6b52;
+
+    --main-color-1:             Bisque;
+    --main-color-2:             BurlyWood;
+    --accent-color-1:           CadetBlue;
+    --accent-color-2:           DarkCyan;
+    --bubble-color:             #fffae4;
+    --accent-bubble-color:      #faf0a3;
+    --accent-bubble-text-color: #7e6a36;
+    --accent-bubble-hl-color:   rgba(255,208,0,1);
+    --accent-bubble-hli-color:  rgba(255,208,0,0);
+    --pascal-body-color:        #ff3f49;
+    --pascal-text-color:        #ffd44c;
+
+    --border-radius: 2em;
+
+    font-family: var(--main-font-family);
+    color: var(--main-font-color-1);
+  }
+  @keyframes highlight {
+    from {
+      background: linear-gradient(to right, var(--accent-bubble-hli-color) 60%, var(--accent-bubble-hl-color) 50%);
+      background-size: 200% 100%;
+      background-position:left bottom;
+    }
+    to {
+      background-size: 100% 100%;
+      background-position:left bottom;
+    }
   }
   h1{
     text-align: center;
+    color: var(--pascal-text-color);
+  }
+  .logo{
+    background: var(--pascal-body-color);
+    border-radius: 5em;
+    padding: .25em .25em;
+    width: fit-content();
   }
   .options{
     display: grid;
@@ -41,7 +78,7 @@
   .subOptionCat{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
     grid-gap: .3em;
     grid-column: span 2;
     text-align: center;
@@ -51,6 +88,33 @@
     display: grid;
     grid-row: span 3;
     text-align: left;
+  }
+  .arrowContainer{
+    background: var(--accent-bubble-color);
+    color: var(--accent-bubble-text-color);
+    border-radius: var(--border-radius);
+    padding: .5em 0.5em;
+    display: grid;
+    font-size: 1.25rem;
+  }
+  .arrow{
+    border: none;
+    background: none;
+    color:  var(--main-font-color-1);
+    font-family: var(--main-font-family);
+    font-size: 1.25em;
+  }
+  .arrow:is(:focus, :hover){
+    /*background-color: var(--accent-bubble-hl-color);*/
+    animation: highlight 1s ease;
+
+  }
+  .arrow.up{
+    -moz-transform: scale(1, -1);
+    -webkit-transform: scale(1, -1);
+    -o-transform: scale(1, -1);
+    -ms-transform: scale(1, -1);
+    transform: scale(1, -1);
   }
   .bigBtn{
     margin: 1em auto;
@@ -64,8 +128,12 @@
     justify-content: center;
     text-align: center;
   }
+  .historyCat{
+    background: var(--bubble-color);
+  }
   .history{
     position: absolute;
+
     top: 2.5em;
     left: 0px;
     overflow: hidden;
@@ -80,14 +148,16 @@
     width: 100%;
     grid-column: span 2;
     height: 9.8em;
-    background: linear-gradient(0, rgba(255,255,255,1), rgba(255,255,255,0));
+    background: linear-gradient(0, var(--bubble-color), rgba(255,255,255,0));
     z-index: 100;
   }
   </style>
 
 </head>
 <body>
-  <h1>Pascal Background Maker</h1>
+  <div class="logo">
+    <h1>Pascal Background Maker</h1>
+  </div>
   <div class="options">
     <div class="optionCat">
       <h2>General Options</h2>
@@ -130,17 +200,21 @@
     <div class="optionCat minCat">
       <h3>Fine adjustments</h3>
       <div id="fontSize" class="increments subOptionCat"><label>Adjust Font Size:</label>
-        <button id="fontUp"   class="font arrow up">^</button>
-        <span   id="fontNum"  class="number">85</span>
-        <button id="fontDown" class="font arrow down">v</button>
+        <div class="arrowContainer">
+          <button id="fontUp"   class="font arrow up">v</button>
+          <span   id="fontNum"  class="number">85</span>
+          <button id="fontDown" class="font arrow down">v</button>
+        </div>
       </div>
       <div id="lineWidth" class="increments subOptionCat"><label>Adjust Line Width:</label>
-        <button id="widthUp"   class="width arrow up">^</button>
-        <span   id="widthNum"  class="number">38</span>
-        <button id="widthDown" class="width arrow down">v</button>
+        <div class="arrowContainer">
+          <button id="widthUp"   class="width arrow up">v</button>
+          <span   id="widthNum"  class="number">38</span>
+          <button id="widthDown" class="width arrow down">v</button>
+        </div>
       </div>
     </div>
-    <div class="optionCat minCat">
+    <div class="optionCat minCat historyCat">
       <h3>Quote History</h3>
       <div class="historyShade"></div>
       <ul id="quoteHistory" class="history"></ul>
@@ -148,7 +222,7 @@
   </div>
   <button id="finalize" class="bigBtn">Make it, maaan</button>
   <div class="preview">
-    <h1 id="quote"></h1>
+    <h4 id="quote"></h4>
     <!-- //TODO: this could be a history field that is hidden until clicked to go through the history -->
     <canvas id="canvas" style="display:block; margin: auto;"/></canvas>
   </div>
