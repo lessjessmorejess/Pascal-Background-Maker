@@ -10,6 +10,7 @@
   :root{
     --main-font-family:         'Rounded', Arial, Helvetical, sans-serif;
     --main-font-color-1:        #7c6b52;
+    --main-font-color-hl:       #00cbda;
 
     --main-color-1:             Bisque;
     --main-color-2:             BurlyWood;
@@ -23,19 +24,26 @@
     --pascal-body-color:        #ff3f49;
     --pascal-text-color:        #ffd44c;
 
+    --input-padding:            1em 1.5em;
+
     --border-radius: 2em;
 
     font-family: var(--main-font-family);
     color: var(--main-font-color-1);
   }
   @keyframes highlight {
-    from {
-      width: 0%;
+    0% {
+      width: .75em;
+      left: -0.45em;
       background-position:left bottom;
       background-repeat: no-repeat;
     }
-    to {
+    17%{
+      left: -0.5em;
+    }
+    100% {
       width: calc(100% + 1em);
+      left: -0.5em;
     }
   }
   .highlight{
@@ -55,20 +63,76 @@
     height: .85em;
     z-index: -1;
   }
-  .up .highlight:after{
+  .up .highlight:not(.quick):after,
+  .up .highlight.quick:after{
     bottom: unset;
     top: 0%;
   }
-  .highlight:hover::after{
+  .highlight:not(.quick):hover::after{
     background: var(--accent-bubble-hl-color);
     display: block;
     content: "";
-    animation: highlight .3s cubic-bezier(0.35, 0, 0.94, 0.21);
+    animation: highlight .25s cubic-bezier(0.35, 0, 0.94, 0.21);
     animation-fill-mode: forwards;
+  }
+  .highlight.quick:hover:after{
+    background: var(--accent-bubble-hl-color);
+    display: block;
+    content: "";
+    animation: highlight .05s cubic-bezier(0.35, 0, 0.94, 0.21);
+    animation-fill-mode: forwards
   }
   h1{
     text-align: center;
     color: var(--pascal-text-color);
+  }
+  label{
+    font-size: 1.25em;
+  }
+  select{
+    appearance: none;
+    border: 0px;
+    background: var(--bubble-color);
+    border-radius: var(--border-radius);
+    color: var(--main-font-color-1);
+    font-size: 1.2em;
+    text-align: center;
+    margin: auto;
+    padding: var(--input-padding);
+    padding-right: 2.2em;
+    text-overflow: ellipsis;
+    max-width: 30ch;
+  }
+  :is(input, select):is(:focus-visible, :hover, :focus) {
+    outline: none;
+    background-color: var(--accent-bubble-hl-color);
+  }
+  .selectContainer{
+    position: relative;
+    width: fit-content;
+    margin: auto;
+  }
+  .selectContainer::after{
+    content: "v";
+    border: none;
+    background: none;
+    color: var(--main-font-color-1);
+    font-family: var(--main-font-family);
+    font-size: 1.4em;
+    right: 1em;
+    top: 0.7em;
+    position: absolute;
+  }
+  input{
+    border: 0px;
+    background: var(--bubble-color);
+    border-radius: var(--border-radius);
+    color: var(--main-font-color-1);
+    padding: var(--input-padding);
+    font-size: 1.2em;
+  }
+  input::placeholder{
+    color: var(--main-font-color-1);
   }
   .logo{
     background: var(--pascal-body-color);
@@ -87,6 +151,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 3em auto;
     grid-gap: .5em;
+    align-items: center;
   }
   .minCat{
     grid-template-rows: 2.5em auto;
@@ -142,14 +207,15 @@
     background: var(--accent-bubble-color);
     color: var(--accent-bubble-text-color);
     border-radius: var(--border-radius);
+    font-family: var(--main-font-family);
     border: none;
-    padding: .25em .5em;
+    padding: var(--input-padding);
     display: block;
     font-size: 1.2rem;
   }
   .bigBtn{
     margin: 1em auto;
-    padding: .5em 1em;
+    padding: var(--input-padding);
     display: block;
     font-size: 2rem;
   }
@@ -161,17 +227,17 @@
   }
   .historyCat{
     background: var(--bubble-color);
+    border-radius: var(--border-radius);
   }
   .history{
     position: absolute;
-
     top: 2.5em;
     left: 0px;
     overflow: hidden;
     grid-column: span 2;
     margin: 0px;
     max-height: 9.8em;
-  }
+  }s
   .historyShade{
     position: absolute;
     top: 2.5em;
@@ -181,6 +247,7 @@
     height: 9.8em;
     background: linear-gradient(0, var(--bubble-color), rgba(255,255,255,0));
     z-index: 100;
+    border-radius: var(--border-radius);
   }
   </style>
 
@@ -192,38 +259,43 @@
   <div class="options">
     <div class="optionCat">
       <h2>General Options</h2>
-      <label for="resolution">Device:</label>
-      <select id="resolution" name="resolution" class="update">
-       <optgroup label="iPhone">
-        <option value="iPhone Xs Max/11 Pro Max">iPhone Xs Max/11 Pro Max (1242 x 2688)</option>
-        <option value="iPhone Xr/11">iPhone Xr/11 (828 x 1792)</option>
-        <option value="iPhone X/Xs/11 Pro">iPhone X/Xs/11 Pro (1125 x 2436)</option>
-        <option value="iPhone 8+/7+/6s+/6+">iPhone 8+/7+/6s+/6+ (1080 x 1920)</option>
-        <option value="iPhone 8/7/6s/6">iPhone 8/7/6s/6 (750 x 1334)</option>
-        <option value="iPhone 5/5c/5s/SE">iPhone 5/5c/5s/SE (640 x 1136)</option>
+      <label>Device:</label>
+      <div class="selectContainer">
+        <select id="resolution" name="resolution" class="update">
+         <optgroup label="iPhone">
+          <option value="iPhone Xs Max/11 Pro Max">iPhone Xs Max/11 Pro Max (1242 x 2688)</option>
+          <option value="iPhone Xr/11">iPhone Xr/11 (828 x 1792)</option>
+          <option value="iPhone X/Xs/11 Pro">iPhone X/Xs/11 Pro (1125 x 2436)</option>
+          <option value="iPhone 8+/7+/6s+/6+">iPhone 8+/7+/6s+/6+ (1080 x 1920)</option>
+          <option value="iPhone 8/7/6s/6">iPhone 8/7/6s/6 (750 x 1334)</option>
+          <option value="iPhone 5/5c/5s/SE">iPhone 5/5c/5s/SE (640 x 1136)</option>
+        </optgroup>
       </select>
-      <label for="theme">Theme:</label>
-      <select id="theme" name="theme" class="update">
-        <option value="0">Light</option>
-        <option value="1">Dark</option>
-      </select>
+    </div>
+      <label>Theme:</label>
+      <div class="selectContainer">
+        <select id="theme" name="theme" class="update">
+          <option value="0">Light</option>
+          <option value="1">Dark</option>
+        </select>
+    </div>
     </div>
     <div class="optionCat">
       <h2>Bubble Options</h2>
-      <label for="position">Bubble Position:</label>
+      <label>Bubble Position:</label>
       <select id="position" name="position" class="update">
         <option value="0">Top Text</option>
         <option value="1">Bottom Text</option>
         <option value="2">Hidden</option>
       </select>
-      <label for="category">Quote Category:</label>
+      <label>Quote Category:</label>
       <select id="category" name="category" class="update">Category
         <option value="New Horizons">New Horizons</option>
         <option value="New Leaf">New Leaf</option>
         <option value="User">User</option>
         <option value="Random">Random</option>
       </select>
-      <label for="inp">Custom Quote:</label>
+      <label>Custom Quote:</label>
       <input id="inp" name="inp" class="update" placeholder="Enter text here"></input>
       <label for="newQuote">New Quote:</label>
       <button id="newQuote" class="btn" name="newQuote"><p class="highlight">Hit me!</p></button>
@@ -232,16 +304,16 @@
       <h3>Fine adjustments</h3>
       <div id="fontSize" class="increments subOptionCat"><label>Adjust Font Size:</label>
         <div class="arrowContainer">
-          <button id="fontUp"   class="font arrow up"><p class="highlight">v</p></button>
+          <button id="fontUp"   class="font arrow up"><p class="highlight quick">v</p></button>
           <span   id="fontNum"  class="number">85</span>
-          <button id="fontDown" class="font arrow down"><p class="highlight">v</p></button>
+          <button id="fontDown" class="font arrow down"><p class="highlight quick">v</p></button>
         </div>
       </div>
       <div id="lineWidth" class="increments subOptionCat"><label>Adjust Line Width:</label>
         <div class="arrowContainer">
-          <button id="widthUp"   class="width arrow up"><p class="highlight">v</p></button>
+          <button id="widthUp"   class="width arrow up"><p class="highlight quick">v</p></button>
           <span   id="widthNum"  class="number">38</span>
-          <button id="widthDown" class="width arrow down"><p class="highlight">v</p></button>
+          <button id="widthDown" class="width arrow down"><p class="highlight quick">v</p></button>
         </div>
       </div>
     </div>
