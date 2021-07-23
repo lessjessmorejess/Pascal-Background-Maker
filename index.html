@@ -4,18 +4,20 @@
   <style>
   @font-face {
     font-family: 'Rounded';
-    src: url("arlrdbd.ttf");
+    src: url("assets/arlrdbd.ttf");
   }
 
   :root{
+    font-size: 16pt;
     --main-font-family:         'Rounded', Arial, Helvetical, sans-serif;
+    --black:                    #4d3d38;
     --main-font-color-1:        #7c6b52;
     --main-font-color-hl:       #00cbda;
 
-    --main-color-1:             Bisque;
-    --main-color-2:             BurlyWood;
-    --accent-color-1:           CadetBlue;
-    --accent-color-2:           DarkCyan;
+    --main-color-1:             #417543;
+    --main-color-2:             #407443;
+    --accent-color-1:           #a89074;
+    --accent-color-2:           #e6c693;
     --bubble-color:             #fffae4;
     --accent-bubble-color:      #faf0a3;
     --accent-bubble-text-color: #7e6a36;
@@ -24,12 +26,17 @@
     --pascal-body-color:        #ff3f49;
     --pascal-text-color:        #ffd44c;
 
-    --input-padding:            1em 1.5em;
+    --input-padding:            .75em 1.25em;
 
     --border-radius: 2em;
 
     font-family: var(--main-font-family);
     color: var(--main-font-color-1);
+  }
+  body{
+    background: var(--main-color-1);
+    background-size: 10%;
+    background-image: url("assets/bg.png");
   }
   @keyframes highlight {
     0% {
@@ -63,11 +70,6 @@
     height: .85em;
     z-index: -1;
   }
-  .up .highlight:not(.quick):after,
-  .up .highlight.quick:after{
-    bottom: unset;
-    top: 0%;
-  }
   .highlight:not(.quick):hover::after{
     background: var(--accent-bubble-hl-color);
     display: block;
@@ -85,9 +87,10 @@
   h1{
     text-align: center;
     color: var(--pascal-text-color);
+    font-size: 2rem;
   }
   label{
-    font-size: 1.25em;
+    font-size: 1.25rem;
   }
   select{
     appearance: none;
@@ -95,22 +98,25 @@
     background: var(--bubble-color);
     border-radius: var(--border-radius);
     color: var(--main-font-color-1);
-    font-size: 1.2em;
+    font-size: 1rem;
     text-align: center;
-    margin: auto;
     padding: var(--input-padding);
     padding-right: 2.2em;
     text-overflow: ellipsis;
-    max-width: 30ch;
+    width: 100%;
   }
   :is(input, select):is(:focus-visible, :hover, :focus) {
     outline: none;
     background-color: var(--accent-bubble-hl-color);
   }
+  .optionContainer{
+    margin: 1rem 0;
+  }
+  .previewContainer{
+    margin: 1rem 0;
+  }
   .selectContainer{
     position: relative;
-    width: fit-content;
-    margin: auto;
   }
   .selectContainer::after{
     content: "v";
@@ -118,9 +124,9 @@
     background: none;
     color: var(--main-font-color-1);
     font-family: var(--main-font-family);
-    font-size: 1.4em;
+    font-size: 1.2rem;
     right: 1em;
-    top: 0.7em;
+    top: 0.4em;
     position: absolute;
   }
   input{
@@ -129,40 +135,47 @@
     border-radius: var(--border-radius);
     color: var(--main-font-color-1);
     padding: var(--input-padding);
-    font-size: 1.2em;
+    font-size: 1rem;
+    max-width: 30ch;
   }
   input::placeholder{
-    color: var(--main-font-color-1);
+    color: var(--main-font-color-2);
   }
   .logo{
     background: var(--pascal-body-color);
     border-radius: 5em;
-    padding: .25em .25em;
-    width: fit-content();
+    padding: .25em 2em;
+    margin: 0 auto 1em;
+    width: fit-content;
   }
   .options{
+    background: var(--accent-color-1);
+    padding: 1em;
+    border-radius: 2rem;
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: row;
     grid-gap: .75em;
   }
   .optionCat, .miniCat{
+    background: var(--accent-color-2);
+    border-radius: 1.5rem;
+    padding: 1em;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 4fr 6fr;
     grid-template-rows: 3em auto;
-    grid-gap: .5em;
+    grid-gap: .75em;
     align-items: center;
   }
   .minCat{
     grid-template-rows: 2.5em auto;
     position: relative;
   }
-  .optionCat :is(h2,h3){
+  :is(h2,h3){
     grid-column: span 2;
     text-align: center;
     margin: .75em 0 .5em 0px;
   }
-  .optionCat h3{
+  h3{
     grid-column: span 2;
     text-align: center;
     margin: .75em 0 .25em 0px;
@@ -185,23 +198,32 @@
     background: var(--accent-bubble-color);
     color: var(--accent-bubble-text-color);
     border-radius: var(--border-radius);
-    padding: .5em 0.5em;
+    padding: .5em 0.8em;
     display: grid;
+    grid-auto-flow: column;
     font-size: 1.25rem;
+    margin: 0 0 0 auto;
+  }
+  #inp::placeholder{
+    color: red;
   }
   .arrow{
     border: none;
     background: none;
     color:  var(--main-font-color-1);
     font-family: var(--main-font-family);
-    font-size: 1.25em;
+    font-size: 1.25rem;
   }
-  .arrow.up{
-    -moz-transform: scale(1, -1);
-    -webkit-transform: scale(1, -1);
-    -o-transform: scale(1, -1);
-    -ms-transform: scale(1, -1);
-    transform: scale(1, -1);
+  .number{
+    padding: 0 2ch;
+  }
+  #fontNum:after{
+    content:"px";
+    padding-left: 2px;
+  }
+  #widthNum:after{
+    content:"ch";
+    padding-left: 2px;
   }
   .btn{
     background: var(--accent-bubble-color);
@@ -211,13 +233,14 @@
     border: none;
     padding: var(--input-padding);
     display: block;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   .bigBtn{
     margin: 1em auto;
     padding: var(--input-padding);
     display: block;
     font-size: 2rem;
+    max-width: unset;
   }
   .preview{
     display: grid;
@@ -227,108 +250,223 @@
   }
   .historyCat{
     background: var(--bubble-color);
-    border-radius: var(--border-radius);
+    border-radius: 1.5rem;
+    align-items: flex-start;
   }
   .history{
-    position: absolute;
     top: 2.5em;
     left: 0px;
-    overflow: hidden;
+    overflow: auto;
     grid-column: span 2;
-    margin: 0px;
-    max-height: 9.8em;
-  }s
+    max-height: 15rem;
+    margin: 0px 1em 0px 0px;
+    padding: 0 1em 0 2em;
+    margin-bottom: .5em;
+  }
   .historyShade{
     position: absolute;
-    top: 2.5em;
+    bottom: 0;
     left: 0px;
     width: 100%;
     grid-column: span 2;
-    height: 9.8em;
+    height: 85%;
     background: linear-gradient(0, var(--bubble-color), rgba(255,255,255,0));
     z-index: 100;
     border-radius: var(--border-radius);
   }
+  .historyCat:is(:active, :focus, :target, :focus-within, :hover) .historyShade{
+    transition: .3s ease background;
+    background: none;
+    bottom: 0;
+    height: 0.8em;
+  }
+  .oldQuote{
+    padding: .4em .6em;
+    border-bottom: 2px solid var(--main-font-color-1);
+  }
+  .oldQuote:hover{
+    color: var(--main-font-color-hl);
+  }
+  .oldQuote::before,
+  .oldQuote::after{
+    content:'"';
+  }
+  .previewContainer{
+    background: var(--black);
+    border-radius: 2em;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    max-width: 50vw;
+    margin: auto;
+  }
+  #previewRender{
+    background: blue;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+  .finalContainer{
+    display: none;
+  }
+  .finalContainer.open{
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: rgba( 0, 0, 0, .6);
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+  }
+  @media only screen and (min-width: 62em){
+    .options{
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media only screen and (min-width: 82em){
+    :root{
+      font-size: 12pt;
+    }
+    body{
+      background-size: 4%;
+    }
+    main{
+      display: grid;
+      grid-template-columns:  66% 33%;
+      grid-gap: 1.5rem;
+      margin: 0 1rem;
+    }
+    label{
+      font-size: 1rem;
+    }
+    h2{
+      margin: .2em 0;
+    }
+    select, input, .btn, .number{
+      font-size: .8rem;
+    }
+    .bigBtn{
+      font-size: 2rem;
+    }
+
+    .options{
+      grid-template-rows: auto auto auto;
+    }
+    .optionCat{
+      grid-column: 1;
+      grid-row: span 1;
+      grid-template-rows: unset;
+    }
+    .historyCat{
+      grid-column: 2;
+      grid-row: 1 / span 3;
+      grid-template-rows: unset;
+    }
+  }
+
   </style>
 
 </head>
 <body>
-  <div class="logo">
-    <h1>Pascal Background Maker</h1>
-  </div>
-  <div class="options">
-    <div class="optionCat">
-      <h2>General Options</h2>
-      <label>Device:</label>
-      <div class="selectContainer">
-        <select id="resolution" name="resolution" class="update">
-         <optgroup label="iPhone">
-          <option value="iPhone Xs Max/11 Pro Max">iPhone Xs Max/11 Pro Max (1242 x 2688)</option>
-          <option value="iPhone Xr/11">iPhone Xr/11 (828 x 1792)</option>
-          <option value="iPhone X/Xs/11 Pro">iPhone X/Xs/11 Pro (1125 x 2436)</option>
-          <option value="iPhone 8+/7+/6s+/6+">iPhone 8+/7+/6s+/6+ (1080 x 1920)</option>
-          <option value="iPhone 8/7/6s/6">iPhone 8/7/6s/6 (750 x 1334)</option>
-          <option value="iPhone 5/5c/5s/SE">iPhone 5/5c/5s/SE (640 x 1136)</option>
-        </optgroup>
-      </select>
-    </div>
-      <label>Theme:</label>
-      <div class="selectContainer">
-        <select id="theme" name="theme" class="update">
-          <option value="0">Light</option>
-          <option value="1">Dark</option>
-        </select>
-    </div>
-    </div>
-    <div class="optionCat">
-      <h2>Bubble Options</h2>
-      <label>Bubble Position:</label>
-      <select id="position" name="position" class="update">
-        <option value="0">Top Text</option>
-        <option value="1">Bottom Text</option>
-        <option value="2">Hidden</option>
-      </select>
-      <label>Quote Category:</label>
-      <select id="category" name="category" class="update">Category
-        <option value="New Horizons">New Horizons</option>
-        <option value="New Leaf">New Leaf</option>
-        <option value="User">User</option>
-        <option value="Random">Random</option>
-      </select>
-      <label>Custom Quote:</label>
-      <input id="inp" name="inp" class="update" placeholder="Enter text here"></input>
-      <label for="newQuote">New Quote:</label>
-      <button id="newQuote" class="btn" name="newQuote"><p class="highlight">Hit me!</p></button>
-    </div>
-    <div class="optionCat minCat">
-      <h3>Fine adjustments</h3>
-      <div id="fontSize" class="increments subOptionCat"><label>Adjust Font Size:</label>
-        <div class="arrowContainer">
-          <button id="fontUp"   class="font arrow up"><p class="highlight quick">v</p></button>
-          <span   id="fontNum"  class="number">85</span>
-          <button id="fontDown" class="font arrow down"><p class="highlight quick">v</p></button>
+  <main>
+    <div class="optionContainer">
+      <div class="logo">
+        <h1>Pascal Background Maker</h1>
+      </div>
+      <div class="options">
+        <div class="optionCat">
+          <h2>General Options</h2>
+          <label>Device:</label>
+          <div class="selectContainer">
+            <select id="resolution" name="resolution" class="update">
+             <optgroup label="iPhone">
+              <option value="iPhone Xs Max/11 Pro Max">iPhone Xs Max/11 Pro Max (1242 x 2688)</option>
+              <option value="iPhone Xr/11">iPhone Xr/11 (828 x 1792)</option>
+              <option value="iPhone X/Xs/11 Pro">iPhone X/Xs/11 Pro (1125 x 2436)</option>
+              <option value="iPhone 8+/7+/6s+/6+">iPhone 8+/7+/6s+/6+ (1080 x 1920)</option>
+              <option value="iPhone 8/7/6s/6">iPhone 8/7/6s/6 (750 x 1334)</option>
+              <option value="iPhone 5/5c/5s/SE">iPhone 5/5c/5s/SE (640 x 1136)</option>
+            </optgroup>
+          </select>
+        </div>
+          <label>Theme:</label>
+          <div class="selectContainer">
+            <select id="theme" name="theme" class="update">
+              <option value="0">Light</option>
+              <option value="1">Dark</option>
+            </select>
+        </div>
+        </div>
+        <div class="optionCat">
+
+            <h2>Bubble Options</h2>
+            <label>Bubble Position:</label>
+            <div class="selectContainer">
+              <select id="position" name="position" class="update">
+                <option value="0">Top Text</option>
+                <option value="1">Bottom Text</option>
+                <option value="2">Hidden</option>
+              </select>
+            </div>
+            <label>Game:</label>
+            <div class="selectContainer">
+              <select id="category" name="category" class="update">Category
+                <option value="New Horizons">New Horizons</option>
+                <option value="New Leaf">New Leaf</option>
+                <option value="Random">Random</option>
+              </select>
+            </div>
+          <label for="newQuote">Random Quote:</label>
+          <button id="newQuote" class="btn" name="newQuote"><p class="highlight">Hit me!</p></button>
+          <label>Custom Quote:</label>
+          <input id="inp" name="inp" class="update" placeholder="Hey, maaan..."></input>
+
+        </div>
+        <div class="optionCat minCat historyCat">
+          <h3>Quote History</h3>
+          <ul id="quoteHistory" class="history"></ul>
+          <div class="historyShade"></div>
+        </div>
+        <div class="optionCat minCat">
+          <h3>Fine adjustments</h3>
+          <div id="fontSize" class="increments subOptionCat"><label>Adjust Font Size:</label>
+            <div class="arrowContainer">
+              <button id="fontDown"   class="font arrow down"><p class="highlight quick"><</p></button>
+              <span   id="fontNum"  class="number">85</span>
+              <button id="fontUp" class="font arrow up"><p class="highlight quick">></p></button>
+            </div>
+          </div>
+          <div id="lineWidth" class="increments subOptionCat"><label>Adjust Line Width:</label>
+            <div class="arrowContainer">
+              <button id="widthDown"   class="width arrow down"><p class="highlight quick"><</p></button>
+              <span   id="widthNum"  class="number">38</span>
+              <button id="widthUp" class="width arrow up"><p class="highlight quick">></p></button>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="lineWidth" class="increments subOptionCat"><label>Adjust Line Width:</label>
-        <div class="arrowContainer">
-          <button id="widthUp"   class="width arrow up"><p class="highlight quick">v</p></button>
-          <span   id="widthNum"  class="number">38</span>
-          <button id="widthDown" class="width arrow down"><p class="highlight quick">v</p></button>
-        </div>
+      <button id="finalize" class="btn bigBtn"><p class="highlight">Make it, maaan</p></button>
+    </div>
+    <div class="previewContainer">
+      <div id="previewRender">
+        <canvas id="previewCanvas" style="display:block; margin: auto;"/></canvas>
       </div>
     </div>
-    <div class="optionCat minCat historyCat">
-      <h3>Quote History</h3>
-      <div class="historyShade"></div>
-      <ul id="quoteHistory" class="history"></ul>
+  </main>
+  <section class="finalContainer">
+    <div id="finalContainer">
+      <button onClick="$('.finalContainer').removeClass('open')">X</button>
+      <div id="finalRender">
+        <canvas id="finalCanvas" style="display:block; margin: auto;"/></canvas>
+      </div>
     </div>
-  </div>
-  <button id="finalize" class="btn bigBtn"><p class="highlight">Make it, maaan</p></button>
-  <div class="preview">
-    <h4 id="quote"></h4>
-    <!-- //TODO: this could be a history field that is hidden until clicked to go through the history -->
-    <canvas id="canvas" style="display:block; margin: auto;"/></canvas>
-  </div>
+  </section>
 
 </body>
   <script>
@@ -370,9 +508,13 @@
   var bubbleYBuffer = 30;
   var textFont  = "bold " + fontSizePx + "px Rounded, Arial" //TODO get arial rounded in this. 90px is correct relative to the quote image size.
 
-  var canvas = document.getElementById('canvas'),
-        ctx = canvas.getContext('2d');
-        canvas.crossOrigin = "Anonymous";
+  var pCanvas = document.getElementById('previewCanvas'),
+        pctx = pCanvas.getContext('2d');
+        pCanvas.crossOrigin = "Anonymous";
+
+  var fCanvas = document.getElementById('finalCanvas'),
+        fctx = fCanvas.getContext('2d');
+        fCanvas.crossOrigin = "Anonymous";
 
   //would make these jquery but need document on load
   var submissionElement  = document.getElementById("inp")
@@ -394,7 +536,6 @@
 
 
   function BuildFinal(){
-      document.getElementById("quote").textContent = "'" + text + "'"
       console.log("received text" + text)
     //Get relevant variables
       deviceW = resolutions[model].width
@@ -426,28 +567,28 @@
 
     //Build the canvas
       //Set the canvas dimensions & scale to match the selected model
-        canvas.setAttribute("width",  deviceW)
-        canvas.setAttribute("height", deviceH)
+        fCanvas.setAttribute("width",  deviceW)
+        fCanvas.setAttribute("height", deviceH)
 
         //TODO: Shrink the preview size in a way that lets everything scale appropriately
 
-        ctx.scale(scaleMatch, scaleMatch)
-        ctx.clearRect(0, 0, deviceW, deviceH);
+        fctx.scale(scaleMatch, scaleMatch)
+        fctx.clearRect(0, 0, deviceW, deviceH);
 
       //Draw the image layers
-      //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-        ctx.drawImage(thisWaterImg, startXlarge, 0);
-        ctx.drawImage(thisPascalImg, startXlarge, startYsmall);
+      //fctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+        fctx.drawImage(thisWaterImg, startXlarge, 0);
+        fctx.drawImage(thisPascalImg, startXlarge, startYsmall);
 
-        ctx.drawImage(thisLightImg, startXlarge, 0);
+        fctx.drawImage(thisLightImg, startXlarge, 0);
 
       //change the drawing scale so the text bubble can fit properly in the window
 
         //the current scale must be undone to properly scale the bubble.
-        ctx.scale(1/scaleMatch,1/scaleMatch);
+        fctx.scale(1/scaleMatch,1/scaleMatch);
 
         if (position !== 2){
-          ctx.scale(scaleBubble,scaleBubble);
+          fctx.scale(scaleBubble,scaleBubble);
           bubbleYPos = 0;
           if (position){
             bubbleYPos = deviceH/scaleBubble - bubbleImg.height - dockHeight/scaleBubble + deviceNotchH
@@ -455,21 +596,23 @@
           else bubbleYPos = deviceNotchH + bubbleYBuffer
 
 
-          ctx.drawImage(bubbleImg, 0, bubbleYPos);
+          fctx.drawImage(bubbleImg, 0, bubbleYPos);
 
 
           //refill text
-            ctx.fillStyle = textColor;
-            ctx.font = textFont
-            ctx.textBaseline = "top"
+            fctx.fillStyle = textColor;
+            fctx.font = textFont
+            fctx.textBaseline = "top"
 
-            checkAndReplaceRandomItem(quote)
+            text = checkAndReplaceRandomItem(text)
             var lines = wrapLines(text,lineWidth,3)
             //console.log(`lines length = ${lines}`)
-            ctx.fillText(lines[0], fontXPadding, bubbleYPos + fontYPadding);
-            if (lines.length > 1) ctx.fillText(lines[1], fontXPadding, bubbleYPos + fontYPadding + fontYLinePadding);
-            if (lines.length > 2) ctx.fillText(lines[2], fontXPadding, bubbleYPos + fontYPadding + (2*fontYLinePadding));
+            fctx.fillText(lines[0], fontXPadding, bubbleYPos + fontYPadding);
+            if (lines.length > 1) fctx.fillText(lines[1], fontXPadding, bubbleYPos + fontYPadding + fontYLinePadding);
+            if (lines.length > 2) fctx.fillText(lines[2], fontXPadding, bubbleYPos + fontYPadding + (2*fontYLinePadding));
           }
+
+      $(".finalContainer").addClass('open');
 
 
 
@@ -482,7 +625,90 @@
             AND fit in the space provided.
             Building the final will be easier, so this function calls that for now.
     */
-    BuildFinal()
+  //Get relevant variables
+    areaW = $('#previewRender').width();
+
+
+    deviceW = resolutions[model].width;
+    deviceH = resolutions[model].height;
+    deviceNotchH = resolutions[model].notchHeight || 0;
+
+    areaH = (areaW * deviceH)/deviceW;
+    //console.log("I would like to set dockHeight to " + Math.floor(deviceH * 0.12))
+
+    //scaleMatch should be the ratio to make the scaling 1:1
+    var scaleMatch = (areaH/thisPascalImg.height)
+
+    console.log(`areaW: ${areaW}`)
+    console.log(`areaH: ${areaH}`)
+    console.log(`deviceW: ${deviceW}`)
+    console.log(`deviceH: ${deviceH}`)
+    console.log(`bubbleImg.width: ${bubbleImg.width}`)
+    console.log(`bubbleImg.height: ${bubbleImg.height}`)
+    // Currently this var is not used
+    var scaleSmall = (areaW/thisPascalImg.width)
+    //scaleBubble is made to fit the bubble to the screen
+    var scaleBubble = (areaW/bubbleImg.width);
+
+    deviceNotchH = resolutions[model].notchHeight || 0;
+    dockHeight = Math.floor(areaH * .12);
+
+
+    //These variables are for placing the images in the correct spot
+      startXlarge = ((areaW * (1/scaleMatch))/2 - (pascalLW.width/2))
+      startYlarge = (((pascalLW.height - areaH)/2) * scaleMatch)
+      startXsmall = (((pascalLW.height - areaH)/2) * scaleSmall);
+      startYsmall = (((pascalLW.width  - areaW)/2) * scaleSmall)
+      if (position === 1){
+        startYsmall = -startYsmall
+      }
+
+  //Build the canvas
+    //Set the canvas dimensions & scale to match the selected model
+      pCanvas.setAttribute("width",  areaW)
+      pCanvas.setAttribute("height", areaH)
+
+      //TODO: Shrink the preview size in a way that lets everything scale appropriately
+
+      pctx.scale(scaleMatch, scaleMatch)
+      pctx.clearRect(0, 0, areaW, areaH);
+
+    //Draw the image layers
+    //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+      pctx.drawImage(thisWaterImg, startXlarge, 0);
+      pctx.drawImage(thisPascalImg, startXlarge, startYsmall);
+
+      pctx.drawImage(thisLightImg, startXlarge, 0);
+
+    //change the drawing scale so the text bubble can fit properly in the window
+
+      //the current scale must be undone to properly scale the bubble.
+      pctx.scale(1/scaleMatch,1/scaleMatch);
+
+      if (position !== 2){
+        pctx.scale(scaleBubble,scaleBubble);
+        bubbleYPos = 0;
+        if (position){
+          bubbleYPos = areaH/scaleBubble - bubbleImg.height - dockHeight/scaleBubble + deviceNotchH
+        }
+        else bubbleYPos = deviceNotchH + bubbleYBuffer
+
+
+        pctx.drawImage(bubbleImg, 0, bubbleYPos);
+
+
+        //refill text
+          pctx.fillStyle = textColor;
+          pctx.font = textFont
+          pctx.textBaseline = "top"
+
+          text = checkAndReplaceRandomItem(text)
+          var lines = wrapLines(text,lineWidth,3)
+          //console.log(`lines length = ${lines}`)
+          pctx.fillText(lines[0], fontXPadding, bubbleYPos + fontYPadding);
+          if (lines.length > 1) pctx.fillText(lines[1], fontXPadding, bubbleYPos + fontYPadding + fontYLinePadding);
+          if (lines.length > 2) pctx.fillText(lines[2], fontXPadding, bubbleYPos + fontYPadding + (2*fontYLinePadding));
+        }
   }
 
   function ProcessVars(historyQuote){
@@ -524,10 +750,18 @@
         else if(inputText !== ""){
           text = inputText
         }
+        //If the quote is NOT the same as the last one or is the first quote
         if (text !== quoteHistory[quoteHistory.length - 1] || quoteHistory.length === 0){
           console.log(`last quote: ${quoteHistory[quoteHistory.length - 1]}`)
-          quoteHistory.push(text)
-          document.getElementById("quoteHistory").innerHTML += `<li onClick="useHistoricQuote(${quoteHistory.length - 1})">${text}</li>`;
+          //If the quote is written in and is still being typed
+          if (text.substring(0,text.length-1) === quoteHistory[quoteHistory.length - 1]){
+            quoteHistory[quoteHistory.length - 1] = text
+            $(`#quote${quoteHistory.length - 1}`).text(text);
+          }
+          else{
+            quoteHistory.push(text)
+            document.getElementById("quoteHistory").innerHTML += `<li id="quote${quoteHistory.length - 1}" onClick="useHistoricQuote(${quoteHistory.length - 1})" class="oldQuote">${text}</li>`;
+          }
         }
 
 
@@ -579,6 +813,8 @@
     <a native fruit>
     <random object>
     */
+    console.log("____Replacing____")
+    console.log(quote)
     return quote
   }
 
@@ -676,7 +912,7 @@
 
   function useHistoricQuote(num){
     ProcessVars(quoteHistory[num])
-    BuildFinal();
+    BuildPreview();
   }
 
   //Get the JSON file of quotes and resolutions
@@ -695,7 +931,7 @@
       loaded = true;
       r = Math.random()
       ProcessVars("");
-      BuildFinal()
+      BuildPreview()
     });
   });
 
@@ -703,7 +939,7 @@
   //When an option is updated, update the preview
   $(document).on('input','.update',function(){
     ProcessVars("")
-    BuildFinal()
+    BuildPreview()
     //TODO separate preview & final
     //BuildPreview()
   });
@@ -711,14 +947,14 @@
     console.log("hit")
     r = Math.random()
     ProcessVars("")
-    BuildFinal()
+    BuildPreview()
     //TODO separate preview & final
     //BuildPreview()
   })
   $('.arrow').click(function(){
     Increment(this.classList)
     ProcessVars("")
-    BuildFinal()
+    BuildPreview()
     //TODO separate preview & final
     //BuildPreview()
   })
@@ -729,5 +965,11 @@
     BuildFinal()
 
   });
+
+  //When the page is resized
+  $( window ).resize(function() {
+    ProcessVars("")
+    BuildPreview()
+  })
   </script>
 </html>
