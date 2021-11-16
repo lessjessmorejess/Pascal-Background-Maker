@@ -1,0 +1,41 @@
+{
+  "name": "pascal-background-maker",
+  "version": "1.0.0",
+  "description": "Get fun quotes from Pascal in a neat, picture-esc format for your IRL Nook Phone!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephless/Pascal-Background-Generator.git"
+  },
+  "keywords": [
+    "Animal",
+    "Crossing",
+    "New",
+    "Horizons",
+    "ACNH",
+    "Animal",
+    "Crossing",
+    "New",
+    "Horizons",
+    "New",
+    "Leaf",
+    "Pascal",
+    "Tom",
+    "Nook"
+  ],
+  "author": "Steph Leslie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stephless/Pascal-Background-Generator/issues"
+  },
+  "homepage": "https://github.com/stephless/Pascal-Background-Generator#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
