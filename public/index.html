@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<!-- TODO: Host it somewhere!-->
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VV00QVX07"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-9VV00QVX07');
-  </script>
+<head>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K945HKX');</script>
+<!-- End Google Tag Manager -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <style>
   @font-face {
@@ -21,12 +19,12 @@
     font-size: 16pt;
     --main-font-family:         'Rounded', Arial, Helvetical, sans-serif;
     --black:                    #4d3d38;
-    --black-dark:                    #372b28;
+    --black-dark:               #372b28;
     --main-font-color-1:        #7c6b52;
     --main-font-color-hl:       #00cbda;
 
-    --main-color-1:             #417543;
-    --main-color-2:             #407443;
+    --main-color-1:             #8abf69;
+    --main-color-2:             #c5e19c;
     --accent-color-1:           #a89074;
     --accent-color-2:           #e6c693;
     --bubble-color:             #fffae4;
@@ -108,6 +106,7 @@
   }
   select{
     appearance: none;
+    -webkit-appearance:none;
     border: 0px;
     background: var(--bubble-color);
     border-radius: var(--border-radius);
@@ -459,8 +458,14 @@
     top: 2vh;
     box-shadow: var(--box-shadow);
   }
+  #finalRender{
+    text-align: center;
+  }
   #finalCanvas{
-    height: 90vh;
+    display: none !important;
+  }
+  #finalImg{
+    height: 85vh;
   }
 
   @media only screen and (min-width: 62em){
@@ -559,6 +564,10 @@
 
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K945HKX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
   <main>
     <div class="appContainer">
       <div class="logo">
@@ -677,9 +686,11 @@
       <button class="btn" onClick="$('.finalContainer').removeClass('open')"><p class="highlight">Close</p></button>
       <div id="finalRender">
         <canvas id="finalCanvas" style="display:block; margin: auto;"></canvas>
+        <img id="finalImg">
       </div>
     </div>
   </section>
+
 
 </body>
   <script>
@@ -826,6 +837,9 @@
           }
 
       $(".finalContainer").addClass('open');
+      // fill an img src with a URL that contains the final image
+      document.getElementById('finalImg').src = fCanvas.toDataURL();
+
 
 
 
