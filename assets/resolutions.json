@@ -1,0 +1,67 @@
+{
+  "iPhone 12 Pro Max/ 13 Pro Max"  : {
+    "width"  : 1284,
+    "height" : 2778,
+    "notchHeight": 150
+  },
+  "iPhone 12/12 Pro/13/13 Pro"  : {
+    "width"  : 1170,
+    "height" : 2532,
+    "notchHeight": 150
+  },
+  "iPhone 12 Mini/13 mini"  : {
+    "width"  : 1080,
+    "height" : 2340,
+    "notchHeight": 150
+  },
+  "iPhone Xs Max/11 Pro Max"  : {
+    "width"  : 1242,
+    "height" : 2688,
+    "notchHeight": 150
+  },
+  "iPhone Xr/11"        : {
+    "width"  : 828,
+    "height" : 1792,
+    "notchHeight": 150
+  },
+  "iPhone X/Xs/11 Pro"  :  {
+    "width"  : 1125,
+    "height" : 2436,
+    "notchHeight": 150
+  },
+  "iPhone 8+/7+/6s+/6+" :  {
+    "width"  : 1080,
+    "height" : 1920,
+    "notchHeight": 80
+  },
+  "iPhone 8/7/6s/6"     : {
+    "width"  : 750,
+    "height" : 1334,
+    "notchHeight": 80
+  },
+  "iPhone 5/5c/5s/SE"   : {
+    "width"  : 640,
+    "height" : 1136,
+    "notchHeight": 80
+  },
+  "1440 x 2960"   : {
+    "width"  : 1440,
+    "height" : 2960,
+    "notchHeight": 100
+  },
+  "1080 x 1920"   : {
+    "width"  : 1080,
+    "height" : 1920,
+    "notchHeight": 100
+  },
+  "720 x 1280"   : {
+    "width"  : 720,
+    "height" : 1280,
+    "notchHeight": 100
+  },
+  "640 x 1136"   : {
+    "width"  : 640,
+    "height" : 1136,
+    "notchHeight": 100
+  }
+}
