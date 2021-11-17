@@ -40,7 +40,7 @@ body{
 }
 main{
   margin-bottom: 20rem;
-  min-width: 250px;
+  min-width: 350px;
 }
 @keyframes highlight {
   0% {
@@ -247,7 +247,7 @@ h4{
   grid-template-columns: auto 1fr;
 }
 .arrowContainer{
-  width: 7em;
+  width: 16em;
   height: 1rem;
   justify-content: space-between;
   background: var(--accent-bubble-color);
@@ -269,6 +269,9 @@ h4{
   color:  var(--main-font-color-1);
   font-family: var(--main-font-family);
   font-size: .75rem;
+}
+.plusArrow{
+  letter-spacing: -.1em;
 }
 .number.px:after{
   content:"px";

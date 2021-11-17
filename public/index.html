@@ -88,21 +88,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
               <div id="PascalPos" class="increments subOptionCat"><label>Pascal's Position:</label>
                 <div class="arrowContainer">
+                  <button id="pPosDownPlus" class="pPos arrow downPlus">
+                    <p class="highlight quick plusArrow" plusArrow>
+                      <<</p>
+                    </button>
                   <button id="pPosDown" class="pPos arrow down">
                     <p class="highlight quick">
-                      <</p> </button> <span id="pPosNum" class="number px"> 0</span>
+                      <</p>
+                    </button>
+                    <span id="pPosNum" class="number px"> 0</span>
                         <button id="pPosUp" class="pPos arrow up">
                           <p class="highlight quick">></p>
+                        </button>
+                        <button id="pPosUpPlus" class="pPos arrow upPlus">
+                          <p class="highlight quick plusArrow">>></p>
                         </button>
                 </div>
               </div>
               <div id="bubblePos" class="increments subOptionCat"><label>Bubble Position:</label>
                 <div class="arrowContainer">
+                  <button id="bPosDownPlus" class="bPos arrow downPlus ">
+                    <p class="highlight quick plusArrow">
+                      <<</p> </button>
                   <button id="bPosDown" class="bPos arrow down">
                     <p class="highlight quick">
                       <</p> </button> <span id="bPosNum" class="number px"> 0</span>
                         <button id="bPosUp" class="bPos arrow up">
                           <p class="highlight quick">></p>
+                        <button id="bPosUpPlus" class="bPos arrow upPlus ">
+                          <p class="highlight quick plusArrow">>></p>
                         </button>
                 </div>
               </div>
@@ -158,7 +172,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="socialLink" href="https://github.com/stephless/Pascal-Background-Maker">
           <img class="socialIcon" src="assets/gh.png" alt="Github: github.com/stephless/Pascal-Background-Maker">
         </a>
-        <p class="credit">Created by Steph Leslie</p>
+        <p class="credit">Artwork, Design and Code by Steph Leslie</p>
       </div>
     </div>
     <div id="finalizeContainer" class="btnContainer">
@@ -558,6 +572,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (direction === "down"){
         pascalPosYOffeset += 10
       }
+      if (direction === "upPlus"){
+        pascalPosYOffeset -= 100
+      }
+      if (direction === "downPlus"){
+        pascalPosYOffeset += 100
+      }
       pascalPosDisplay.textContent = -pascalPosYOffeset
     }
     if (type == "bPos"){
@@ -566,6 +586,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
       if (direction === "down"){
         bubblePosYOffeset += 10
+      }
+      if (direction === "upPlus"){
+        bubblePosYOffeset -= 100
+      }
+      if (direction === "downPlus"){
+        bubblePosYOffeset += 100
       }
       bubblePosDisplay.textContent = -bubblePosYOffeset
     }
