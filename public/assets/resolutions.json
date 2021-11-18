@@ -32,17 +32,17 @@
   "iPhone 8+/7+/6s+/6+" :  {
     "width"  : 1080,
     "height" : 1920,
-    "notchHeight": 80
+    "notchHeight": 50
   },
   "iPhone 8/7/6s/6"     : {
     "width"  : 750,
     "height" : 1334,
-    "notchHeight": 80
+    "notchHeight": 50
   },
   "iPhone 5/5c/5s/SE"   : {
     "width"  : 640,
     "height" : 1136,
-    "notchHeight": 80
+    "notchHeight": 50
   },
   "1440 x 2960"   : {
     "width"  : 1440,
@@ -57,11 +57,11 @@
   "720 x 1280"   : {
     "width"  : 720,
     "height" : 1280,
-    "notchHeight": 100
+    "notchHeight": 50
   },
   "640 x 1136"   : {
     "width"  : 640,
     "height" : 1136,
-    "notchHeight": 100
+    "notchHeight": 50
   }
 }

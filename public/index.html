@@ -1,13 +1,29 @@
 <!DOCTYPE html>
+<!--
+     TODO: Quote history doubles sometimes
+     TODO: Android Sizes
+ -->
+
 <head>
   <Title>Pascal Background Maker</title>
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-K945HKX');</script>
-<!-- End Google Tag Manager -->
+  <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-K945HKX');
+  </script>
+  <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="description" content="AC Pascal Background Maker">
   <meta name="keywords" content="Animal Crossing, Pascal, AC, New Horizones, Animal Crossing New Horizons, Tom Nook, fanart">
@@ -19,65 +35,74 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <link rel="stylesheet" href="style.css">
-
 </head>
+
 <body>
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K945HKX"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K945HKX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <main>
-  <div class="appContainer">
-    <div class="logo">
-      <h1>Pascal Background Maker</h1>
-    </div>
-    <div class="optionsContainer">
-      <div class="navContainer"><a class="navLink" href="help.html">Help</a></div>
-      <div class="optionsGrid">
-        <div class="optionCat gen">
-          <h2>General Options</h2>
-          <label>Screen Size:</label>
-          <div class="selectContainer">
-            <select id="resolution" name="resolution" class="update">
-              <optgroup label="Generic">
-                <option value="1440 x 2960">1440 x 2960</option>
-                <option value="1080 x 1920">1080 x 1920</option>
-                <option value="720 x 1280">720 x 1280</option>
-                <option value="640 x 1136">640 x 1136</option>
-              </optgroup>
-              <optgroup label="iPhone">
-                <option value="iPhone 12 Pro Max/ 13 Pro Max">iPhone 12 Pro Max/ 13 Pro Max (1284 x 2778)</option>
-                <option value="iPhone 12/12 Pro/13/13 Pro">iPhone 12/12 Pro/13/13 Pro (1170 x 2532)</option>
-                <option value="iPhone 12 Mini/13 mini">iPhone 12 Mini/13 mini (1080 x 2340)</option>
-                <option value="iPhone Xs Max/11 Pro Max">iPhone Xs Max/11 Pro Max (1242 x 2688)</option>
-                <option value="iPhone Xr/11">iPhone Xr/11 (828 x 1792)</option>
-                <option value="iPhone X/Xs/11 Pro">iPhone X/Xs/11 Pro (1125 x 2436)</option>
-                <option value="iPhone 8+/7+/6s+/6+">iPhone 8+/7+/6s+/6+ (1080 x 1920)</option>
-                <option value="iPhone 8/7/6s/6">iPhone 8/7/6s/6 (750 x 1334)</option>
-                <option value="iPhone 5/5c/5s/SE">iPhone 5/5c/5s/SE (640 x 1136)</option>
-              </optgroup>
-            </select>
-          </div>
-          <label>Theme:</label>
-          <div class="selectContainer">
-            <select id="theme" name="theme" class="update">
-              <option value="0">Light</option>
-              <option value="1">Dark</option>
-            </select>
-          </div>
+    <div class="appContainer">
+      <div class="logo">
+        <h1>Pascal Background Maker</h1>
+      </div>
+      <div class="optionsContainer">
+        <div class="navContainer">
+          <a class="navLink" href="help.html">Help</a>
         </div>
-
-        <div class="optionCat form">
-          <h2>Formatting Options</h2>
-          <label>Format:</label>
-          <div class="selectContainer">
-            <select id="position" name="position" class="update">
-              <option value="0">Top Bubble</option>
-              <option value="1">Bottom Bubble</option>
-              <option value="2">No Bubble</option>
-            </select>
+        <div class="optionsGrid">
+          <div class="optionCat gen">
+            <h2>General Options</h2>
+            <label>Screen Size:</label>
+            <div class="selectContainer">
+              <select id="resolution" name="resolution" class="update">
+                <optgroup label="Generic">
+                  <option value="1440 x 2960">1440 x 2960</option>
+                  <option value="1080 x 1920">1080 x 1920</option>
+                  <option value="720 x 1280">720 x 1280</option>
+                  <option value="640 x 1136">640 x 1136</option>
+                </optgroup>
+                <optgroup label="iPhone">
+                  <option value="iPhone 12 Pro Max/ 13 Pro Max">iPhone 12 Pro Max/ 13 Pro Max (1284 x 2778)</option>
+                  <option value="iPhone 12/12 Pro/13/13 Pro">iPhone 12/12 Pro/13/13 Pro (1170 x 2532)</option>
+                  <option value="iPhone 12 Mini/13 mini">iPhone 12 Mini/13 mini (1080 x 2340)</option>
+                  <option value="iPhone Xs Max/11 Pro Max">iPhone Xs Max/11 Pro Max (1242 x 2688)</option>
+                  <option value="iPhone Xr/11">iPhone Xr/11 (828 x 1792)</option>
+                  <option value="iPhone X/Xs/11 Pro">iPhone X/Xs/11 Pro (1125 x 2436)</option>
+                  <option value="iPhone 8+/7+/6s+/6+">iPhone 8+/7+/6s+/6+ (1080 x 1920)</option>
+                  <option value="iPhone 8/7/6s/6">iPhone 8/7/6s/6 (750 x 1334)</option>
+                  <option value="iPhone 5/5c/5s/SE">iPhone 5/5c/5s/SE (640 x 1136)</option>
+                </optgroup>
+              </select>
+            </div>
+            <label>Theme:</label>
+            <div class="selectContainer">
+              <select id="theme" name="theme" class="update">
+                <option value="0">Light</option>
+                <option value="1">Dark</option>
+              </select>
+            </div>
+            <label>Buffer:</label>
+            <div class="selectContainer">
+              <select id="buffer" name="buffer" class="update">
+                <!-- TODO FIx these vakues-->
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
           </div>
-          <!--<label>Game:</label>
+
+          <div class="optionCat form">
+            <h2>Formatting Options</h2>
+            <label>Format:</label>
+            <div class="selectContainer">
+              <select id="position" name="position" class="update">
+                <option value="0">Top Bubble</option>
+                <option value="1">Bottom Bubble</option>
+                <option value="2">No Bubble</option>
+              </select>
+            </div>
+            <!--<label>Game:</label>
               <div class="selectContainer">
                 <select id="category" name="category" class="update">Category
                   <option value="New Horizons">New Horizons</option>
@@ -86,112 +111,131 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </select>
               </div>-->
 
-              <div id="PascalPos" class="increments subOptionCat"><label>Pascal's Position:</label>
-                <div class="arrowContainer">
-                  <button id="pPosDownPlus" class="pPos arrow downPlus">
-                    <p class="highlight quick plusArrow" plusArrow>
-                      <<</p>
-                    </button>
-                  <button id="pPosDown" class="pPos arrow down">
-                    <p class="highlight quick">
-                      <</p>
-                    </button>
-                    <span id="pPosNum" class="number px"> 0</span>
-                        <button id="pPosUp" class="pPos arrow up">
-                          <p class="highlight quick">></p>
-                        </button>
-                        <button id="pPosUpPlus" class="pPos arrow upPlus">
-                          <p class="highlight quick plusArrow">>></p>
-                        </button>
-                </div>
+            <div id="PascalPos" class="increments subOptionCat">
+              <label>Pascal's Position:</label>
+              <div class="arrowContainer">
+                <button id="pPosDownPlus" class="pPos arrow downPlus">
+                  <p class="highlight quick plusArrow" plusArrow><<</p>
+                </button>
+                <button id="pPosDown" class="pPos arrow down">
+                  <p class="highlight quick"><</p>
+                </button> <span id="pPosNum" class="number px"> 0</span>
+                <button id="pPosUp" class="pPos arrow up">
+                  <p class="highlight quick">></p>
+                </button>
+                <button id="pPosUpPlus" class="pPos arrow upPlus">
+                  <p class="highlight quick plusArrow">>></p>
+                </button>
               </div>
-              <div id="bubblePos" class="increments subOptionCat"><label>Bubble Position:</label>
-                <div class="arrowContainer">
-                  <button id="bPosDownPlus" class="bPos arrow downPlus ">
-                    <p class="highlight quick plusArrow">
-                      <<</p> </button>
-                  <button id="bPosDown" class="bPos arrow down">
-                    <p class="highlight quick">
-                      <</p> </button> <span id="bPosNum" class="number px"> 0</span>
-                        <button id="bPosUp" class="bPos arrow up">
-                          <p class="highlight quick">></p>
-                        <button id="bPosUpPlus" class="bPos arrow upPlus ">
-                          <p class="highlight quick plusArrow">>></p>
-                        </button>
-                </div>
+            </div>
+            <div id="bubblePos" class="increments subOptionCat">
+              <label>Bubble Position:</label>
+              <div class="arrowContainer">
+                <button id="bPosDownPlus" class="bPos arrow downPlus ">
+                  <p class="highlight quick plusArrow"><<</p>
+                </button>
+                <button id="bPosDown" class="bPos arrow down">
+                  <p class="highlight quick"><</p>
+                </button>
+                <span id="bPosNum" class="number px"> 0</span>
+                <button id="bPosUp" class="bPos arrow up">
+                  <p class="highlight quick">></p>
+                <button id="bPosUpPlus" class="bPos arrow upPlus ">
+                  <p class="highlight quick plusArrow">>></p>
+                </button>
               </div>
-
-
-        </div>
-
-        <div class="optionCat quote">
-          <h2>Text Options</h2>
-          <label>Custom Quote:</label>
-          <div class="customInputDiv">
-            <input id="inp" name="inp" class="update" placeholder="Hey, maaan..."></input>
-            <button class="clear icon" onClick="$('#inp').val('');"></button>
-          </div>
-
-          <label for="newQuote">Random Quote:</label>
-          <button id="newQuote" class="btn" name="newQuote">
-            <p class="highlight" style="width">Hit me!</p>
-          </button>
-
-          <div id="fontSize" class="increments subOptionCat"><label>Font Size:</label>
-            <div class="arrowContainer">
-              <button id="fontDown" class="font arrow down">
-                <p class="highlight quick">
-                  <</p> </button> <span id="fontNum" class="number px">85</span>
-                    <button id="fontUp" class="font arrow up">
-                      <p class="highlight quick">></p>
-                    </button>
             </div>
           </div>
-          <div id="lineWidth" class="increments subOptionCat"><label>Line Wrap:<button class='tip icon'><div class="tooltip">Adjust this if the text is overflowing!</div></button></label>
-            <div class="arrowContainer">
-              <button id="widthDown" class="width arrow down">
-                <p class="highlight quick">
-                  <</p> </button> <span id="widthNum" class="number ch">38</span>
-                    <button id="widthUp" class="width arrow up">
-                      <p class="highlight quick">></p>
-                    </button>
+          <div class="optionCat quote">
+            <h2>Text Options</h2>
+            <label>Custom Quote:</label>
+            <div id="customInputDiv">
+              <label class="message">Please clear to request a quote</label>
+              <input id="inp" name="inp" class="update" placeholder="Hey, maaan..."></input>
+              <button class="clear icon" onClick="$('#inp').val('');$('#customInputDiv').removeClass('error');"></button>
+            </div>
+
+            <label for="newQuote">Random Quote:</label>
+            <button id="newQuote" class="btn" name="newQuote">
+              <p class="highlight" style="width">Hit me!</p>
+            </button>
+
+
+            <div id="fontSize" class="increments subOptionCat">
+              <label>Font Size:</label>
+              <div class="arrowContainer">
+                <button id="fontDownPlus" class="font arrow downPlus">
+                  <p class="highlight quick plusArrow"><<</p>
+                </button>
+                <button id="fontDown" class="font arrow down">
+                  <p class="highlight quick"><</p>
+                </button>
+                <span id="fontNum" class="number px">85</span>
+                <button id="fontUp" class="font arrow up">
+                  <p class="highlight quick">></p>
+                </button>
+                <button id="fontUpPlus" class="font arrow upPlus">
+                  <p class="highlight quick plusArrow">>></p>
+                </button>
+              </div>
+            </div>
+            <div id="lineWidth" class="increments subOptionCat">
+              <label>Line Wrap:
+                <button class='tip icon'>
+                  <div class="tooltip">Adjust this if the text is overflowing!</div>
+                </button>
+              </label>
+              <div class="arrowContainer">
+                <button id="widthDownPlus" class="width arrow downPlus">
+                  <p class="highlight quick plusArrow"><<</p>
+                </button>
+                <button id="widthDown" class="width arrow down">
+                  <p class="highlight quick"><</p>
+                </button>
+                <span id="widthNum" class="number ch">38</span>
+                <button id="widthUp" class="width arrow up">
+                  <p class="highlight quick">></p>
+                </button>
+                <button id="widthUpPlus" class="width arrow upPlus">
+                  <p class="highlight quick plusArrow">>></p>
+                </button>
+              </div>
             </div>
           </div>
-
+          <div class="optionCat minCat historyCat">
+            <h3>Quote History</h3>
+            <ul id="quoteHistory" class="history"></ul>
+            <div class="historyShade"></div>
+          </div>
         </div>
-
-        <div class="optionCat minCat historyCat">
-          <h3>Quote History</h3>
-          <ul id="quoteHistory" class="history"></ul>
-          <div class="historyShade"></div>
+        <div class="socialContainer">
+          <a class="socialLink" href="https://www.instagram.com/art.steph.w.les/"> <img class="socialIcon" src="assets/ig.png" alt="Instagram: @art.steph.w.les">
+          </a>
+          <a class="socialLink" href="https://github.com/stephless/Pascal-Background-Maker">
+            <img class="socialIcon" src="assets/gh.png" alt="Github: github.com/stephless/Pascal-Background-Maker">
+          </a>
+          <p class="credit">Artwork, Design and Code by Steph Leslie</p>
         </div>
       </div>
-      <div class="socialContainer">
-        <a class="socialLink" href="https://www.instagram.com/art.steph.w.les/"> <img class="socialIcon" src="assets/ig.png" alt="Instagram: @art.steph.w.les">
-        </a>
-        <a class="socialLink" href="https://github.com/stephless/Pascal-Background-Maker">
-          <img class="socialIcon" src="assets/gh.png" alt="Github: github.com/stephless/Pascal-Background-Maker">
-        </a>
-        <p class="credit">Artwork, Design and Code by Steph Leslie</p>
+      <div id="finalizeContainer" class="btnContainer">
+        <button id="finalize" class="btn bigBtn">
+          <p class="highlight">Make it, maaan</p>
+        </button>
       </div>
     </div>
-    <div id="finalizeContainer" class="btnContainer">
-      <button id="finalize" class="btn bigBtn">
-        <p class="highlight">Make it, maaan</p>
-      </button>
+    <div id="previewContainer" class="">
+      <button class="mobileHide mobileToggle" onClick="$('#previewContainer').addClass('hidden')">Hide</button>
+      <button class="mobileShow mobileToggle" onClick="$('#previewContainer').removeClass('hidden')">v</button>
+      <div id="previewRender">
+        <canvas id="previewCanvas" style="display:block; margin: auto;" /></canvas>
+      </div>
     </div>
-  </div>
-  <div id="previewContainer" class="">
-    <button class="mobileHide mobileToggle" onClick="$('#previewContainer').addClass('hidden')">Hide</button>
-    <button class="mobileShow mobileToggle" onClick="$('#previewContainer').removeClass('hidden')">v</button>
-    <div id="previewRender">
-      <canvas id="previewCanvas" style="display:block; margin: auto;" /></canvas>
-    </div>
-  </div>
-</main>
+  </main>
   <section class="finalContainer">
     <div id="finalContainer">
-      <button class="btn" onClick="$('.finalContainer').removeClass('open')"><p class="highlight">Close</p></button>
+      <button class="btn" onClick="$('.finalContainer').removeClass('open')">
+        <p class="highlight">Close</p>
+      </button>
       <div id="finalRender">
         <canvas id="finalCanvas" style="display:block; margin: auto;"></canvas>
         <img id="finalImg">
@@ -201,572 +245,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 </body>
-  <script>
-  //Initial declares
-  var quotes = []
-  var horizons = []
-  var leaf = []
-  var user = []
-  var r
-  //Declare the foundational variables
-  var pascalLW = {
-      "width": 2048,
-      "height": 2732
-    };
-    var dockRatio = .2
+<script src="main.js"></script>
 
-  //Get the images from the assets folder.
-  var bubbleImg = new Image();
-      bubbleImg.src = "assets/bubble_crop.png"
-  var pascalDayImg = new Image();
-      pascalDayImg.src = "assets/pascal_day.png"
-  var pascalNightImg = new Image();
-      pascalNightImg.src = "assets/pascal_night.png"
-  var lightDayImg = new Image();
-      lightDayImg.src = "assets/light_day.png"
-  var lightNightImg = new Image();
-      lightNightImg.src = "assets/light_night.png"
-  var waterDayImg = new Image();
-      waterDayImg.src = "assets/water_day.png"
-  var waterNightImg = new Image();
-      waterNightImg.src = "assets/water_night.png"
-
-
-  var textColor = "#00cbda"
-  var fontSizePx = 85;
-  var lineWidth = 35;
-  var pascalPosYOffeset = 0;
-  var bubblePosYOffeset = 0;
-  var fontXPadding = 150;
-  var fontYPadding = 175;
-  var fontYLinePadding = 125;
-  var bubbleYBuffer = 30;
-  var previousBubblePosition = 0;
-  var textFont  = "bold " + fontSizePx + "px Rounded, Arial"
-
-  var pCanvas = document.getElementById('previewCanvas'),
-        pctx = pCanvas.getContext('2d');
-        pCanvas.crossOrigin = "Anonymous";
-
-  var fCanvas = document.getElementById('finalCanvas'),
-        fctx = fCanvas.getContext('2d');
-        fCanvas.crossOrigin = "Anonymous";
-
-  //would make these jquery but need document on load
-  var submissionElement  = document.getElementById("inp")
-  var resolutionElement  = document.getElementById("resolution")
-  var positionElement    = document.getElementById("position")
-  var themeElement       = document.getElementById("theme")
-  //var categoryElement    = document.getElementById("category")
-  var fontSizeDisplay    = document.getElementById("fontNum")
-  var lineWidthDisplay   = document.getElementById("widthNum")
-  var bubblePosDisplay   = document.getElementById("bPosNum")
-  var pascalPosDisplay   = document.getElementById("pPosNum")
-
-  //Declare default values
-  var text          = "Hey maaan."
-  var quoteHistory  = []
-  var inputText     = submissionElement.value
-  var model         = resolutionElement.value
-  var position      = positionElement.value
-  var theme         = themeElement.value
-  var category      = "Random" //categoryElement.value
-
-
-  function BuildFinal(){
-      //console.log("received text" + text)
-    //Get relevant variables
-      deviceW = resolutions[model].width
-      deviceH = resolutions[model].height
-      deviceNotchH = resolutions[model].notchHeight || 0
-      //console.log("I would like to set dockHeight to " + Math.floor(deviceH * 0.12))
-      dockHeight = Math.floor(deviceH * dockRatio);
-      //scaleMatch should be the ratio to make the scaling 1:1
-      var scaleMatch = deviceH/thisPascalImg.height
-      // Currently this var is not used
-      var scaleSmall = deviceW/thisPascalImg.width
-      //console.log(`Final: ${deviceW} / ${thisPascalImg.width}`)
-      //console.log(`Final: ${scaleSmall}`)
-      //scaleBubble is made to fit the bubble to the screen
-      var scaleBubble = deviceW/bubbleImg.width;
-
-      //These variables are for placing the images in the correct spot
-        startXlarge = ((deviceW * (1/scaleMatch))/2 - (pascalLW.width/2))
-        startYlarge = (((pascalLW.height - deviceH)/2) * scaleMatch)
-        //startXsmall = (((pascalLW.height - deviceH)/2) * scaleSmall);
-        startYsmall = (((pascalLW.width  - deviceW)/2) * scaleSmall)
-        if (position === 1){
-          startYsmall = startYsmall/1.5
-        }
-
-    //Build the canvas
-      //Set the canvas dimensions & scale to match the selected model
-        fCanvas.setAttribute("width",  deviceW)
-        fCanvas.setAttribute("height", deviceH)
-
-
-
-        fctx.scale(scaleMatch, scaleMatch)
-        fctx.clearRect(0, 0, deviceW, deviceH);
-
-      //Draw the image layers
-      //fctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-        fctx.drawImage(thisWaterImg, startXlarge, 0);
-        pascalYStart = startYsmall + pascalPosYOffeset
-        fctx.drawImage(thisPascalImg, startXlarge, pascalYStart);
-
-        fctx.drawImage(thisLightImg, startXlarge, 0);
-
-      //change the drawing scale so the text bubble can fit properly in the window
-
-        //the current scale must be undone to properly scale the bubble.
-        fctx.scale(1/scaleMatch,1/scaleMatch);
-
-        //If the bubble is being rendered
-        if (position !== 2){
-          fctx.scale(scaleBubble,scaleBubble);
-          bubbleYPos = 0;
-          //if the bubble position is set to bottom
-          if (position){
-            bubbleYPos = deviceH/scaleBubble - bubbleImg.height - dockHeight/scaleBubble + deviceNotchH
-          }
-          //If the bubble is set to the top
-          else {
-            bubbleYPos = (deviceNotchH * 2) + bubbleYBuffer
-          }
-          //Add in custom offset
-          bubbleYPos += bubblePosYOffeset
-
-          fctx.drawImage(bubbleImg, 0, bubbleYPos);
-
-
-          //refill text
-            fctx.fillStyle = textColor;
-            fctx.font = textFont
-            fctx.textBaseline = "top"
-
-            text = checkAndReplaceRandomItem(text)
-            var lines = wrapLines(text,lineWidth,3)
-            //console.log(`lines length = ${lines}`)
-            fctx.fillText(lines[0], fontXPadding, bubbleYPos + fontYPadding);
-            if (lines.length > 1) fctx.fillText(lines[1], fontXPadding, bubbleYPos + fontYPadding + fontYLinePadding);
-            if (lines.length > 2) fctx.fillText(lines[2], fontXPadding, bubbleYPos + fontYPadding + (2*fontYLinePadding));
-          }
-
-      $(".finalContainer").addClass('open');
-      // fill an img src with a URL that contains the final image
-      document.getElementById('finalImg').src = fCanvas.toDataURL();
-
-
-
-
-  }
-
-  function BuildPreview(){
-    //Generate the preview canvas
-  //Get relevant variables
-    areaW = $('#previewRender').width();
-
-
-    deviceW = resolutions[model].width;
-    deviceH = resolutions[model].height;
-    deviceNotchH = resolutions[model].notchHeight || 0;
-
-    areaH = (areaW * deviceH)/deviceW;
-    //console.log("I would like to set dockHeight to " + Math.floor(deviceH * 0.12))
-
-    //scaleMatch should be the ratio to make the scaling 1:1
-    var scaleMatch = (areaH/thisPascalImg.height)
-
-    // Currently this var is not used
-    var scaleSmall = (deviceW/thisPascalImg.width)
-    //console.log(`Preview: ${areaW} / ${thisPascalImg.width}`)
-    //console.log(`Preview: ${scaleSmall}`)
-    //scaleBubble is made to fit the bubble to the screen
-    var scaleBubble = (areaW/bubbleImg.width);
-
-    deviceNotchH = resolutions[model].notchHeight || 0;
-    dockHeight = Math.floor(areaH * dockRatio);
-
-
-    //These variables are for placing the images in the correct spot
-      startXlarge = ((areaW * (1/scaleMatch))/2 - (pascalLW.width/2))
-      startYlarge = (((pascalLW.height - areaH)/2) * scaleMatch)
-      startYsmall = (((pascalLW.width  - deviceW)/2) * scaleSmall)
-      if (position === 1){
-        startYsmall = startYsmall/1.5
-      }
-
-  //Build the canvas
-    //Set the canvas dimensions & scale to match the selected model
-      pCanvas.setAttribute("width",  areaW)
-      pCanvas.setAttribute("height", areaH)
-
-
-
-      pctx.scale(scaleMatch, scaleMatch)
-      pctx.clearRect(0, 0, areaW, areaH);
-
-    //Draw the image layers
-    //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-      pctx.drawImage(thisWaterImg, startXlarge, 0);
-      pascalYStart = startYsmall + pascalPosYOffeset
-      pctx.drawImage(thisPascalImg, startXlarge, pascalYStart);
-
-      pctx.drawImage(thisLightImg, startXlarge, 0);
-
-    //change the drawing scale so the text bubble can fit properly in the window
-
-      //the current scale must be undone to properly scale the bubble.
-      pctx.scale(1/scaleMatch,1/scaleMatch);
-
-      //If the bubble is being rendered
-      if (position !== 2){
-        pctx.scale(scaleBubble,scaleBubble);
-        //if the bubble position is set to bottom
-        bubbleYPos = 0;
-        if (position){
-          bubbleYPos = areaH/scaleBubble - bubbleImg.height - dockHeight/scaleBubble + deviceNotchH
-        }
-
-        //If the bubble is set to the top
-        else {
-          bubbleYPos = (deviceNotchH * 2) + bubbleYBuffer
-        }
-        console.log(bubbleYPos)
-
-        //Add in custom offset
-        bubbleYPos += bubblePosYOffeset
-
-
-        pctx.drawImage(bubbleImg, 0, bubbleYPos);
-
-
-        //refill text
-          pctx.fillStyle = textColor;
-          pctx.font = textFont
-          pctx.textBaseline = "top"
-
-          text = checkAndReplaceRandomItem(text)
-          var lines = wrapLines(text,lineWidth,3)
-          //console.log(`lines length = ${lines}`)
-          pctx.fillText(lines[0], fontXPadding, bubbleYPos + fontYPadding);
-          if (lines.length > 1) pctx.fillText(lines[1], fontXPadding, bubbleYPos + fontYPadding + fontYLinePadding);
-          if (lines.length > 2) pctx.fillText(lines[2], fontXPadding, bubbleYPos + fontYPadding + (2*fontYLinePadding));
-        }
-  }
-
-  function ProcessVars(historyQuote){
-
-    if (loaded !== false){
-      //Pulls values from the interactive elements
-        if (historyQuote === "") inputText   = submissionElement.value;
-        else if (historyQuote !== "") inputText = historyQuote;
-        model       = resolutionElement.value
-        position    = parseInt(positionElement.value)
-        theme       = parseInt(themeElement.value)
-
-        //Reset the custom positions when changing formats
-        if (previousBubblePosition !== position){
-          pascalPosYOffeset = 0
-          bubblePosYOffeset = 0
-          pascalPosDisplay.textContent = pascalPosYOffeset
-          bubblePosDisplay.textContent = bubblePosYOffeset
-          previousBubblePosition = position
-        }
-
-      //Get the values from Increment()
-      textFont  = "bold " + fontSizePx + "px Rounded, Arial"
-
-
-      //If the user does not have text in the text input field
-      //console.log(`history: ${historyQuote}`)
-      //console.log(`inputText: ${inputText}`)
-        if (inputText === ""){
-          //generate a random number, apply that to the number of quotes in a section
-          //and deliver the corresponding number.
-          /*switch (category){
-            case "New Horizons":
-              chosenQuote = Math.floor(horizons.length * r)
-              text = horizons[chosenQuote];
-              break;
-            case "New Leaf":
-              chosenQuote = Math.floor(leaf.length * r)
-              text = leaf[chosenQuote];
-              break;
-            case "user":
-              chosenQuote = Math.floor(user.length * r)
-              text = user[chosenQuote];
-              break;
-          }*/
-          chosenQuote = Math.floor(quotes.length * r)
-          text = quotes[chosenQuote];
-        }
-        //Otherwise, use the user's input text.
-        else if(inputText !== ""){
-          text = inputText
-        }
-        //If the quote is NOT the same as the last one or is the first quote
-        if (text !== quoteHistory[quoteHistory.length - 1] || quoteHistory.length === 0){
-          //console.log(`last quote: ${quoteHistory[quoteHistory.length - 1]}`)
-          //If the quote is written in and is still being typed
-          if (text.substring(0,text.length-1) === quoteHistory[quoteHistory.length - 1]){
-
-            if (quoteHistory[quoteHistory.length-1] === text){
-              quoteHistory[quoteHistory.length - 1] = text
-            }
-            quoteHistory[quoteHistory.length - 1] = text
-            //console.log("MATH THING")
-            //console.log(quoteHistory[quoteHistory.length-1])
-            //console.log(text)
-            $(`#quote${quoteHistory.length - 1}`).text(text);
-          }
-          else{
-            quoteHistory.push(text)
-            document.getElementById("quoteHistory").innerHTML += `<li id="quote${quoteHistory.length - 1}" onClick="useHistoricQuote(${quoteHistory.length - 1})" class="oldQuote">${text}</li>`;
-          }
-        }
-
-
-      //Change the images used to render based on the user's selected theme
-        thisWaterImg  = theme ? waterNightImg  : waterDayImg;
-        thisPascalImg = theme ? pascalNightImg : pascalDayImg;
-        thisLightImg  = theme ? lightNightImg  : lightDayImg;
-
-      return
-    }
-  }
-  function Increment(classes){
-    //console.log(classes)
-    //This is bad but I'm lazy
-    var direction = classes[2];
-    var type = classes[0];
-    //console.log(type)
-    //console.log(direction)
-    if (type == "font"){
-      if (direction === "up"){
-        fontSizePx++
-      }
-      if (direction === "down"){
-        fontSizePx--
-      }
-      if (fontSizePx < 50) fontSizePx = 50;
-      if (fontSizePx > 150) fontSizePx = 150;
-      fontSizeDisplay.textContent = fontSizePx
-    }
-    if (type == "width"){
-      if (direction === "up"){
-        lineWidth++
-      }
-      if (direction === "down"){
-        lineWidth--
-      }
-      if (lineWidth <20) lineWidth = 20;
-      if (lineWidth >100) lineWidth = 100;
-      lineWidthDisplay.textContent = lineWidth
-    }
-    if (type == "pPos"){
-      if (direction === "up"){
-        pascalPosYOffeset -= 10
-      }
-      if (direction === "down"){
-        pascalPosYOffeset += 10
-      }
-      if (direction === "upPlus"){
-        pascalPosYOffeset -= 100
-      }
-      if (direction === "downPlus"){
-        pascalPosYOffeset += 100
-      }
-      pascalPosDisplay.textContent = -pascalPosYOffeset
-    }
-    if (type == "bPos"){
-      if (direction === "up"){
-        bubblePosYOffeset -= 10
-      }
-      if (direction === "down"){
-        bubblePosYOffeset += 10
-      }
-      if (direction === "upPlus"){
-        bubblePosYOffeset -= 100
-      }
-      if (direction === "downPlus"){
-        bubblePosYOffeset += 100
-      }
-      bubblePosDisplay.textContent = -bubblePosYOffeset
-    }
-    return;
-  }
-  function checkAndReplaceRandomItem(quote){
-    //TODO: some quotes call for random items. Examples are:
-    /*
-    <random sweet food>
-    <doing random hobby>
-    <random savory food>
-    <a native fruit>
-    <random object>
-    */
-    //console.log("____Replacing____")
-    //console.log(quote)
-    return quote
-  }
-
-  function wrapLines(string,maxLength,numberOfLines){
-    var line = []
-    //If the string is longer than the maxlength, try to break it into different lines
-    if (string.length > maxLength){
-      //console.log("wrapping");
-      //Get an array of the string by word
-      //Create a working string variable
-      var tempString = string;
-      //If tempString starts with a space, keeping removing spaces until it does not.
-          while (tempString.substring(0,1) == " "){
-            tempString = tempString.substring(1,tempString.length)
-          }
-      var strSpaceless = tempString.split(" ");
-      //console.log(strSpaceless)
-
-
-      //For each line until max lines are hit, do the following
-      for (lineNum = 0; lineNum < numberOfLines; lineNum++){
-
-        //console.log("currently on lineNum " + lineNum)
-        //console.log(line[lineNum])
-        //At the beginning of each line, set linebreak to false
-        var linebreak = false;
-        //set chars back to zero as the tempString is shortened on each line
-        var chars = 0;
-
-        //If tempString starts with a space, keeping removing spaces until it does not.
-        while (tempString.substring(0,1) == " "){
-          tempString = tempString.substring(1,tempString.length)
-        }
-
-        //If it's not the last line, try to break the line.
-        if (lineNum !== (numberOfLines-1)){
-
-          //Itterate through all the words until a word would meet the linebreak requirements
-          for (word = 0; linebreak != true && word < strSpaceless.length;){
-            //console.log(`strSpaceless length: ${strSpaceless.length}`)
-            //This line of code is useless, but I don't know why
-
-            //Get the length of the current word
-            tempCharCount = strSpaceless[word].length;
-              //console.log(strSpaceless[word] +" is this many characters long: " + tempCharCount)
-              //console.log("tempCharCount is " + tempCharCount)
-              //console.log("chars is " + chars)
-
-            //If this word does not break the line check if adding a space would break the line.
-            if ((tempCharCount + chars) < maxLength){
-              tempCharCount += 1;
-              //If adding a space does not break the line, add the length word & the space to chars
-              if ((tempCharCount + chars) <= maxLength){
-                chars += tempCharCount
-              }
-              //If the space breaks the line, just add the word and break the line
-              else{
-                chars += tempCharCount
-                linebreak = true;
-              }
-            }
-            //If the word would break the line, break the line
-            else{
-              linebreak = true;
-              //Add the current temptString to the current line based on the number of characters of words that fit.
-              line.push(tempString.substring(0,chars));
-              //If this line is empty
-              if (line[lineNum] === ""){
-                line[lineNum] = tempString.substring(0,strSpaceless[0].length + 1);
-              }
-              //update the temp string to omit this line
-              tempString = tempString.replace(line[lineNum],"")
-              //if (tempString)
-              //Update the word array to omit this line.
-              if (strSpaceless !== undefined) strSpaceless = tempString.split(" ");
-            }
-            word++;
-          }
-        }
-        //If it's the last line, just place the rest of the text.
-        else{
-          line.push(tempString);
-        }
-        //console.log("finished with lineNum " + lineNum)
-        //console.log("'" + line[lineNum] + "'")
-      }
-      return line;
-    }
-    //If the string is only one line, just return it as a JSON
-    else {
-      line.push(string)
-      return line;
-    }
-  }
-
-  function useHistoricQuote(num){
-    ProcessVars(quoteHistory[num])
-    BuildPreview();
-  }
-
-  //This function begins the initial render
-  function allImagesLoaded() {
-
-  }
-
-
-  //When an option is updated, update the preview
-  $(document).on('input','.update',function(){
-    ProcessVars("")
-    BuildPreview()
-  });
-  $('#newQuote').click(function(){
-    //console.log("hit")
-    r = Math.random()
-    ProcessVars("")
-    BuildPreview()
-  })
-  $('.arrow').click(function(){
-    Increment(this.classList)
-    ProcessVars("")
-    BuildPreview()
-  })
-
-  //When the button submit is clicked, create the final result
-  $('#finalize').click(function(){
-    ProcessVars("")
-    BuildFinal()
-
-  });
-
-  //When the page is resized
-  $( window ).resize(function() {
-    ProcessVars("")
-    BuildPreview()
-  })
-
-//On document Load
-  $(window).on("load", function() {
-    //console.log("ALL IMAGES LOADED")
-    //Get the JSON file of quotes and resolutions
-    fetch('assets/quotes.json')
-    .then(response => response.json())
-    .then(data => {
-      quotes = data
-      quotes = quotes["quotes"]
-      //horizons = quotes["Horizons"]
-      //leaf = quotes["Leaf"]
-      //user = quotes["User"]
-
-      fetch('assets/resolutions.json')
-      .then(r_response => r_response.json())
-      .then(r_data => {
-        resolutions = r_data
-        loaded = true;
-        r = Math.random()
-        ProcessVars("");
-        BuildPreview()
-      });
-    });
-})
-  </script>
 </html>
