@@ -386,6 +386,7 @@
 
 
     //These variables are for placing the images in the correct spot
+      //TODO: Pascal is still off center for some reason only on buffered
       startXlarge = ((canvasW * (1/scaleMatch))/2 - (pascalLW.width/2))
       startYlarge = (((pascalLW.height - deviceH)/2) * scaleMatch)
       startYsmall = (((pascalLW.width  - canvasW)/2) * scaleSmall)
@@ -407,7 +408,7 @@
 
       pctx.scale(1/activeBufferRatio, 1/activeBufferRatio)
           pascalYStart = startYsmall + pascalPosYOffeset
-          pctx.drawImage(thisPascalImg, (bufferWSize/scaleMatch) + startXlarge, bufferHSize + pascalYStart);
+          pctx.drawImage(thisPascalImg, (bufferWSize/scaleMatch * activeBufferRatio) + startXlarge, bufferHSize + pascalYStart);
 
       pctx.scale(activeBufferRatio, activeBufferRatio)
       pctx.drawImage(thisLightImg, startXlarge, 0);
@@ -536,7 +537,7 @@ dockHeight = Math.floor(deviceH * dockRatio);
 
   fctx.scale(1/activeBufferRatio, 1/activeBufferRatio)
       pascalYStart = startYsmall + pascalPosYOffeset
-      fctx.drawImage(thisPascalImg, (bufferWSize/scaleMatch) + startXlarge, bufferHSize + pascalYStart);
+      fctx.drawImage(thisPascalImg, (bufferWSize/scaleMatch * activeBufferRatio) + startXlarge, bufferHSize + pascalYStart);
 
   fctx.scale(activeBufferRatio, activeBufferRatio)
   fctx.drawImage(thisLightImg, startXlarge, 0);
