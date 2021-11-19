@@ -44,9 +44,59 @@
     "height" : 1136,
     "notchHeight": 50
   },
-  "1440 x 2960"   : {
+  "Galaxy S10 line | Pixel 4 XL" : {
+    "width"  : 1440,
+    "height" : 3040,
+    "notchHeight": 100
+  },
+  "Galaxy S8 line, S9 line, Note 9 | Pixel 3 XL" : {
     "width"  : 1440,
     "height" : 2960,
+    "notchHeight": 100
+  },
+  "Galaxy S6 line, S7 line, Note 4, Note 5" : {
+    "width"  : 1440,
+    "height" : 2560,
+    "notchHeight": 100
+  },
+  "Pixel 6 Pro" : {
+    "width"  : 1440,
+    "height" : 3120,
+    "notchHeight": 100
+  },
+  "Pixel 5a, 6" : {
+    "width"  : 1080,
+    "height" : 2400,
+    "notchHeight": 100
+  },
+  "Pixel 4a, 5" : {
+    "width"  : 1080,
+    "height" : 2340,
+    "notchHeight": 100
+  },
+  "Pixel 4" : {
+    "width"  : 1080,
+    "height" : 2280,
+    "notchHeight": 100
+  },
+  "Pixel 3a" : {
+    "width"  : 1080,
+    "height" : 2220,
+    "notchHeight": 100
+  },
+  "Pixel 3, 3a XL" : {
+    "width"  : 1080,
+    "height" : 2160,
+    "notchHeight": 100
+  },
+  "Pixel XL, 2 XL" : {
+    "width"  : 1440,
+    "height" : 2560,
+    "notchHeight": 100
+  },
+  "1440 x 2560"   : {
+    "width"  : 1440,
+    "height" : 2560,
     "notchHeight": 100
   },
   "1080 x 1920"   : {

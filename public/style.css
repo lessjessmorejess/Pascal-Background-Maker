@@ -180,6 +180,7 @@ input::placeholder{
   display: grid;
   grid-auto-flow: row;
   padding: .5rem 1rem;
+  grid-gap: .5em;
 }
 .optionCat, .minCat{
   padding: 0 1em 0;
@@ -361,6 +362,7 @@ h4{
   grid-auto-flow: column;
   align-items: center;
   justify-content: space-between;
+  grid-template-columns: 1fr auto;
 }
 #customInputDiv.error{
   grid-template-columns: 1fr auto;
@@ -633,7 +635,7 @@ h4{
     display: flex;
     justify-content: center;
     align-content: center;
-    max-width: 20vw;
+    max-width: 18vw;
     margin: auto;
   }
   #previewRender{
