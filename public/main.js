@@ -442,20 +442,17 @@
         bubbleYPos = 0;
         bubbleXpos = 0
         if (position){
-          bubbleYPos = deviceH - bubbleImg.height - dockHeight/scaleBubble + deviceNotchH
+          bubbleYPos = deviceH/scaleBubble + bufferHSize - bubbleImg.height - dockHeight
         }
         //If the bubble is set to the top
         else {
-          bubbleYPos = (deviceNotchH * 2)
+          bubbleYPos = bufferHSize/scaleBubble + (deviceNotchH * 2)/scaleBubble
         }
-        //console.log(bubbleYPos)
+
 
         //Add in custom offset
         bubbleYPos += bubblePosYOffeset
-
         bubbleXpos =  ((bufferWSize) /scaleBubble)
-        bubbleYPos = ((bubbleYPos + bufferHSize) /scaleBubble)
-        //console.log(bubbleYPos)
         pctx.drawImage(bubbleImg, bubbleXpos, bubbleYPos);
 
 
@@ -557,20 +554,17 @@ dockHeight = Math.floor(deviceH * dockRatio);
     bubbleYPos = 0;
     bubbleXpos = 0
     if (position){
-      bubbleYPos = deviceH - bubbleImg.height - dockHeight/scaleBubble + deviceNotchH
+      bubbleYPos = deviceH/scaleBubble + bufferHSize - bubbleImg.height - dockHeight
     }
     //If the bubble is set to the top
     else {
-      bubbleYPos = (deviceNotchH * 2)
+      bubbleYPos = bufferHSize/scaleBubble + (deviceNotchH * 2)/scaleBubble
     }
-    //console.log(bubbleYPos)
+
 
     //Add in custom offset
     bubbleYPos += bubblePosYOffeset
-
     bubbleXpos =  ((bufferWSize) /scaleBubble)
-    bubbleYPos = ((bubbleYPos + bufferHSize) /scaleBubble)
-    //console.log(bubbleYPos)
     fctx.drawImage(bubbleImg, bubbleXpos, bubbleYPos);
 
 
