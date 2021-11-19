@@ -234,12 +234,12 @@
       </div>
     </div>
     <div id="previewContainer" class="">
-      <button class="mobileHide mobileToggle" onClick="$('#previewContainer').addClass('hidden')">Hide</button>
-      <button class="mobileShow mobileToggle" onClick="$('#previewContainer').removeClass('hidden')">v</button>
+      <button class="mobileHide mobileToggle" onClick="$('#previewContainer').addClass('hidden');$('#mobileShow').addClass('open')">Hide</button>
       <div id="previewRender" class="loading" >
         <canvas id="previewCanvas"  style="display:block; margin: auto;" /></canvas>
       </div>
     </div>
+    <button id="mobileShow" class="mobileShow mobileToggle" onClick="$('#previewContainer').removeClass('hidden');$(this).removeClass('open')">v</button>
   </main>
   <section class="finalContainer">
     <div id="finalContainer">
