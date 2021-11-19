@@ -415,7 +415,7 @@
 
       pctx.scale(1/scaleMatch,1/scaleMatch);
 
-      pctx.globalAlpha = 0.2;
+      pctx.globalAlpha = 0.4;
 
       pctx.fillStyle = bufferColor
       //canvasW

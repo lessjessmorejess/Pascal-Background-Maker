@@ -452,7 +452,7 @@ h4{
   transform: translateX(-400px); /*32*/
 }
 #previewRender{
-  background: #29DCF4;
+  background: var(--black-dark);
   border-radius: 1em;
   width: 100%;
   display: flex;
