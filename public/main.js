@@ -643,6 +643,7 @@ dockHeight = Math.floor(deviceH * dockRatio);
 
   //On document Load
   $(window).on("load", function() {
+
     //console.log("ALL IMAGES LOADED")
     //Get the JSON file of quotes and resolutions
     fetch('assets/quotes.json')
@@ -657,6 +658,7 @@ dockHeight = Math.floor(deviceH * dockRatio);
       fetch('assets/resolutions.json')
       .then(r_response => r_response.json())
       .then(r_data => {
+        $("#previewRender").removeClass("loading")
         resolutions = r_data
         loaded = true;
         r = Math.random()

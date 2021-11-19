@@ -465,6 +465,17 @@ h4{
   border-radius: 1em;
   max-width:100%
 }
+#previewRender.loading{
+  flex-direction: column;
+  text-align: center;
+  padding-top: 150px;
+
+}
+#previewRender.loading::before{
+  content: "Loading";
+  color: var(--bubble-color)
+
+}
 .mobileToggle{
   border: none;
   font-family: var(--main-font-family);
