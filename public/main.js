@@ -662,6 +662,7 @@ dockHeight = Math.floor(deviceH * dockRatio);
         resolutions = r_data
         loaded = true;
         r = Math.random()
+        $("#previewRender").removeClass("loading")
         ProcessVars("");
         BuildPreview()
       });
